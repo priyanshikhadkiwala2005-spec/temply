@@ -1,0 +1,280 @@
+@import "tailwindcss";
+
+@theme {
+  --color-plum: #54245f;
+  --color-grape: #632c70;
+  --color-brand: #843da0;
+  --color-lav: #b66bc8;
+  --color-mist: #eeddf5;
+  --color-pale: #fcf8fe;
+  --color-ink: #38223f;
+  --color-muted: #786a82;
+  --font-serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+}
+
+body {
+  margin: 0;
+  background: #fcf8fe;
+  color: #38223f;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #b66bc8;
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid #843da0;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+.on-dark :focus-visible {
+  outline-color: #eeddf5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.grain {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+@keyframes festiveGradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.festive-animated-text {
+  background-image: linear-gradient(
+    135deg,
+    #54245f 0%,
+    #9333ea 16%,
+    #c026d3 32%,
+    #e11d48 48%,
+    #f97316 64%,
+    #eab308 80%,
+    #c026d3 92%,
+    #54245f 100%
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: festiveGradientFlow 6s ease-in-out infinite;
+  will-change: background-position;
+}
+
+@keyframes festiveShimmerFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.festive-shimmer-text {
+  background-image: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    #fef08a 18%,
+    #fde047 34%,
+    #fb923c 50%,
+    #fda4af 68%,
+    #fef08a 84%,
+    #ffffff 100%
+  );
+  background-size: 250% 250%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: festiveShimmerFlow 6s ease-in-out infinite;
+  will-change: background-position;
+}
+
+.festive-animated-bg {
+  background: linear-gradient(
+    135deg,
+    #54245f 0%,
+    #9333ea 20%,
+    #c026d3 40%,
+    #e11d48 60%,
+    #f97316 80%,
+    #eab308 90%,
+    #54245f 100%
+  );
+  background-size: 300% 300%;
+  animation: festiveGradientFlow 5s ease-in-out infinite;
+  will-change: background-position;
+}
+
+@keyframes festiveColorCycle {
+  0% {
+    color: #843da0;
+  }
+  20% {
+    color: #c026d3;
+  }
+  40% {
+    color: #e11d48;
+  }
+  60% {
+    color: #f97316;
+  }
+  80% {
+    color: #eab308;
+  }
+  100% {
+    color: #843da0;
+  }
+}
+
+.festive-color-cycle {
+  animation: festiveColorCycle 4s ease-in-out infinite;
+}
+
+@keyframes festiveStrokeCycle {
+  0% {
+    stroke: #843da0;
+  }
+  20% {
+    stroke: #c026d3;
+  }
+  40% {
+    stroke: #e11d48;
+  }
+  60% {
+    stroke: #f97316;
+  }
+  80% {
+    stroke: #eab308;
+  }
+  100% {
+    stroke: #843da0;
+  }
+}
+
+.festive-stroke-cycle {
+  animation: festiveStrokeCycle 4s ease-in-out infinite;
+}
+
+@keyframes festiveBrightTextFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.festive-bright-text {
+  background-image: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    #fef08a 18%,
+    #fb923c 36%,
+    #f43f5e 54%,
+    #c084fc 72%,
+    #38bdf8 88%,
+    #ffffff 100%
+  );
+  background-size: 250% 250%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: festiveBrightTextFlow 4s ease-in-out infinite;
+  will-change: background-position;
+}
+
+@keyframes festiveBrightCycle {
+  0% {
+    color: #fde047;
+  }
+  25% {
+    color: #fb923c;
+  }
+  50% {
+    color: #f43f5e;
+  }
+  75% {
+    color: #38bdf8;
+  }
+  100% {
+    color: #fde047;
+  }
+}
+
+.festive-bright-cycle {
+  animation: festiveBrightCycle 4s ease-in-out infinite;
+}
+
+@keyframes festiveProgressFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.festive-progress-flow {
+  background: linear-gradient(
+    90deg,
+    #9333ea 0%,
+    #ec4899 20%,
+    #f43f5e 40%,
+    #fb923c 60%,
+    #eab308 80%,
+    #06b6d4 90%,
+    #9333ea 100%
+  );
+  background-size: 250% 100%;
+  animation: festiveProgressFlow 3s ease-in-out infinite;
+  will-change: background-position;
+}

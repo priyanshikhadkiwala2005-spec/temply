@@ -1,0 +1,277 @@
+/* ================================================================== */
+/*  MOBILE-ONLY FESTIVE SCROLL STYLES                                 */
+/*  Sab kuch (max-width: 767.98px) ke andar hai -> desktop untouched. */
+/* ================================================================== */
+
+/* Desktop / default: decorative layers hidden */
+.toran,
+.deck-shade,
+.sparkler,
+.m-only {
+  display: none;
+}
+
+@media (max-width: 767.98px) {
+  .m-only {
+    display: revert;
+  }
+
+  /* ---------------- Deck cards ---------------- */
+  /* clip (hidden nahi) taaki sticky kaam kare aur side scroll na aaye */
+  #main,
+  #main + [data-deck] {
+    overflow-x: clip;
+  }
+  [data-deck] {
+    position: relative;
+    z-index: var(--z, 1);
+    background: #fcf8fe;
+  }
+  [data-deck='sticky'] {
+    position: sticky;
+    top: 0;
+    backface-visibility: hidden;
+  }
+  [data-deck][data-round] {
+    border-radius: 28px 28px 0 0;
+    overflow: clip;
+    box-shadow:
+      0 -1px 0 rgba(255, 255, 255, 0.6) inset,
+      0 -22px 40px -22px rgba(59, 19, 72, 0.55);
+  }
+  /* card ki "gift-wrap" top edge: halki si chamak */
+  [data-deck][data-round]::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    height: 2px;
+    z-index: 45;
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.85), rgba(182, 107, 200, 0.9), transparent);
+    opacity: 0;
+    transition: opacity 0.8s ease 0.2s;
+  }
+  [data-deck].deck-lit::before {
+    opacity: 1;
+  }
+
+  .deck-shade {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    pointer-events: none;
+    background: #24092e;
+    opacity: var(--shade, 0);
+  }
+
+  /* ---------------- Toran ---------------- */
+  .toran {
+    display: block;
+    position: absolute;
+    inset: 0 0 auto;
+    height: 64px;
+    z-index: 40;
+    pointer-events: none;
+  }
+  .toran-rope {
+    position: absolute;
+    inset: 0 0 auto;
+    width: 100%;
+    height: 18px;
+    overflow: visible;
+  }
+  /* rope beech se dono taraf khulti hai */
+  .toran-rope {
+    clip-path: inset(0 50% 0 50%);
+    transition: clip-path 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .deck-lit .toran-rope {
+    clip-path: inset(-4px -4px -4px -4px);
+  }
+
+  .toran-strand {
+    position: absolute;
+    top: 2px;
+    width: 18px;
+    margin-left: -9px;
+    transform-origin: 50% 0;
+    transform: rotate(calc(var(--sw, 0) * var(--k, 1) * 1deg));
+    scale: 1 0;
+    opacity: 0;
+  }
+  .toran-strand:first-child {
+    margin-left: -2px;
+  }
+  .toran-strand:last-child {
+    margin-left: -16px;
+  }
+  .deck-lit .toran-strand {
+    animation: toran-drop 1s cubic-bezier(0.34, 1.56, 0.64, 1) var(--d, 0ms) both;
+  }
+  .toran-sway {
+    display: block;
+    transform-origin: 50% 0;
+    animation: toran-sway 3.2s ease-in-out infinite;
+  }
+  .toran-sway svg {
+    display: block;
+    filter: drop-shadow(0 3px 2px rgba(59, 19, 72, 0.25));
+  }
+
+  @keyframes toran-drop {
+    0% {
+      scale: 1 0;
+      opacity: 0;
+    }
+    35% {
+      opacity: 1;
+    }
+    100% {
+      scale: 1 1;
+      opacity: 1;
+    }
+  }
+  @keyframes toran-sway {
+    0%,
+    100% {
+      rotate: -3deg;
+    }
+    50% {
+      rotate: 3deg;
+    }
+  }
+
+  /* ---------------- Inner card stacks (Features / Progress) ---------------- */
+  [data-stack] > [data-stack-item] {
+    position: sticky;
+    top: 18px;
+    transform-origin: 50% 0;
+  }
+  [data-stack] > [data-stack-item]::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: #3b1348;
+    opacity: calc(var(--c, 0) * 0.28);
+  }
+  [data-stack] > [data-stack-item] {
+    box-shadow: 0 -10px 30px -18px rgba(59, 19, 72, 0.45), 0 18px 40px -26px rgba(59, 19, 72, 0.5);
+  }
+
+  /* ---------------- Phuljhadi (sparkler) progress ---------------- */
+  .sparkler {
+    display: block;
+    position: fixed;
+    inset: 0 0 auto;
+    height: 3px;
+    z-index: 70;
+    pointer-events: none;
+  }
+  .sparkler-fill {
+    height: 100%;
+    transform-origin: 0 50%;
+    transform: scaleX(0);
+    background: linear-gradient(90deg, #54245f, #843da0 35%, #b66bc8 65%, #f59e0b);
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.55);
+    border-radius: 0 2px 2px 0;
+  }
+  .sparkler-head {
+    position: absolute;
+    top: 1.5px;
+    left: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .sparkler-core {
+    position: absolute;
+    left: -5px;
+    top: -5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff 0 25%, #fde68a 45%, rgba(245, 158, 11, 0) 72%);
+    box-shadow: 0 0 10px 4px rgba(251, 191, 36, 0.55);
+    animation: sparkler-pulse 0.5s ease-in-out infinite alternate;
+  }
+  .sparkler-head i {
+    position: absolute;
+    left: -0.75px;
+    top: 0;
+    width: 1.5px;
+    height: 7px;
+    border-radius: 1px;
+    background: linear-gradient(#fff, #fbbf24 55%, rgba(245, 158, 11, 0));
+    transform-origin: 50% 0;
+    opacity: 0;
+    animation: sparkler-spark 0.55s linear infinite;
+    animation-play-state: paused;
+  }
+  .sparkler-head.is-burning i {
+    animation-play-state: running;
+  }
+  @keyframes sparkler-spark {
+    0% {
+      transform: rotate(var(--a)) translateY(3px) scaleY(0.3);
+      opacity: 1;
+    }
+    100% {
+      transform: rotate(var(--a)) translateY(15px) scaleY(1);
+      opacity: 0;
+    }
+  }
+  @keyframes sparkler-pulse {
+    to {
+      scale: 1.35;
+    }
+  }
+
+  /* ---------------- How it works: diya timeline ---------------- */
+  .diya-flame {
+    transform-origin: 50% 100%;
+    animation: diya-flicker 1.3s ease-in-out infinite;
+  }
+  @keyframes diya-flicker {
+    0%,
+    100% {
+      scale: 1 1;
+    }
+    30% {
+      scale: 0.9 1.15;
+    }
+    60% {
+      scale: 1.06 0.94;
+    }
+  }
+
+  /* swipe hint (Showcase) */
+  .swipe-hint {
+    animation: swipe-nudge 2.4s ease-in-out infinite;
+  }
+  @keyframes swipe-nudge {
+    0%,
+    100% {
+      translate: 0 0;
+    }
+    50% {
+      translate: -8px 0;
+    }
+  }
+}
+
+@media (max-width: 767.98px) and (prefers-reduced-motion: reduce) {
+  .toran-strand {
+    scale: 1 1;
+    opacity: 1;
+  }
+  .toran-rope {
+    clip-path: none;
+  }
+  .sparkler-head {
+    display: none;
+  }
+}
