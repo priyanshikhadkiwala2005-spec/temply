@@ -10,6 +10,7 @@ import HowItWorks from './components/sections/HowItWorks'
 import Spotlight from './components/sections/Spotlight'
 import Why from './components/sections/Why'
 import Progress from './components/sections/Progress'
+import Packages from './components/sections/Packages'
 import FestivalStage from './components/ui/FestivalStage'
 import FinalCTA from './components/sections/FinalCTA'
 import DeckCard from './mobile/DeckCard'
@@ -57,10 +58,13 @@ export default function App() {
           <Progress />
         </DeckCard>
         <DeckCard index={8} tone="lavender">
+          <Packages />
+        </DeckCard>
+        <DeckCard index={9} tone="rose">
           <FinalCTA />
         </DeckCard>
       </main>
-      <DeckCard index={9} mode="flow" tone="marigold">
+      <DeckCard index={10} mode="flow" tone="marigold">
         <Footer />
       </DeckCard>
     </MotionConfig>

@@ -1,4 +1,4 @@
-export default function Brand({ light = false }) {
+export default function Brand({ light = false, colorful = false }) {
   return (
     <span className="inline-flex items-center gap-2">
       <span
@@ -96,7 +96,11 @@ export default function Brand({ light = false }) {
 
       <span
         className={`font-serif text-2xl font-semibold tracking-tight ${
-          light ? 'text-white' : 'text-plum'
+          colorful
+            ? 'festive-bright-text'
+            : light
+            ? 'text-white'
+            : 'text-plum'
         }`}
       >
         Festivo
