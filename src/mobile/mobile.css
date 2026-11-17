@@ -30,7 +30,6 @@
   [data-deck='sticky'] {
     position: sticky;
     top: 0;
-    backface-visibility: hidden;
   }
   [data-deck][data-round] {
     border-radius: 28px 28px 0 0;
@@ -62,7 +61,7 @@
     z-index: 50;
     pointer-events: none;
     background: #24092e;
-    opacity: var(--shade, 0);
+    opacity: 0;
   }
 
   /* ---------------- Toran ---------------- */
@@ -148,17 +147,32 @@
     top: 18px;
     transform-origin: 50% 0;
   }
-  [data-stack] > [data-stack-item]::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    background: #3b1348;
-    opacity: calc(var(--c, 0) * 0.28);
-  }
   [data-stack] > [data-stack-item] {
     box-shadow: 0 -10px 30px -18px rgba(59, 19, 72, 0.45), 0 18px 40px -26px rgba(59, 19, 72, 0.5);
+  }
+
+  /* ---------------- PERFORMANCE (phone GPU/CPU bachane ke liye) ---------------- */
+  /* backdrop-filter phone par sabse bhaari cheezon me se hai -> hata do (bg already semi-opaque) */
+  [class*='backdrop-blur'] {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+  /* 400px+ ke blur-3xl/2xl glow blobs scroll par bahut atakte hain -> mobile par hide */
+  .blur-3xl,
+  .blur-2xl {
+    display: none !important;
+  }
+  /* background-position wali infinite animations har frame repaint karti hain -> static */
+  .festive-animated-text,
+  .festive-shimmer-text,
+  .festive-animated-bg,
+  .festive-bright-text,
+  .festive-progress-flow {
+    animation: none !important;
+    will-change: auto !important;
+  }
+  html {
+    -webkit-tap-highlight-color: transparent;
   }
 
   /* ---------------- Phuljhadi (sparkler) progress ---------------- */

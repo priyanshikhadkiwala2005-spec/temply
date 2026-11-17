@@ -20,32 +20,45 @@ const FEST = ['#f59e0b', '#fbbf24', '#fb923c', '#b66bc8', '#843da0', '#ffffff', 
 const STACK_TOP = 18
 const STACK_STEP = 16
 
+// Low-end phone? Bhaari particle effects skip karo taaki scroll smooth rahe
+const LOW_END =
+  typeof navigator !== 'undefined' &&
+  ((navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) ||
+    (navigator.deviceMemory && navigator.deviceMemory <= 4))
+
+// Confetti alag thread (OffscreenCanvas worker) par chalta hai -> main thread free
+let fire = null
+function getFire() {
+  if (!fire) fire = confetti.create(undefined, { resize: true, useWorker: true, disableForReducedMotion: true })
+  return fire
+}
+
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v))
-const easeOut = (t) => 1 - Math.pow(1 - t, 3)
 
 function anar(y) {
+  const f = getFire()
   const base = {
-    particleCount: 18,
+    particleCount: 9,
     spread: 34,
     startVelocity: 34,
     gravity: 1.05,
-    ticks: 120,
+    ticks: 90,
     scalar: 0.72,
     colors: FEST,
     shapes: ['star', 'circle'],
     zIndex: 80,
     disableForReducedMotion: true,
   }
-  confetti({ ...base, angle: 72, origin: { x: 0.08, y } })
-  confetti({ ...base, angle: 108, origin: { x: 0.92, y } })
+  f({ ...base, angle: 72, origin: { x: 0.08, y } })
+  f({ ...base, angle: 108, origin: { x: 0.92, y } })
 }
 
 function fireworks() {
   const shot = (x, y, delay) =>
     setTimeout(
       () =>
-        confetti({
-          particleCount: 48,
+        getFire()({
+          particleCount: 28,
           spread: 360,
           startVelocity: 24,
           gravity: 0.7,
@@ -78,7 +91,12 @@ export default function MobileFestive() {
       ...el.querySelectorAll(':scope > [data-stack-item]'),
     ])
     const lit = new Set()
+    const shades = cards.map((c) => c.querySelector(':scope > .deck-shade'))
+    const torans = cards.map((c) => c.querySelector(':scope > .toran'))
+    const lastShade = cards.map(() => -1)
+    const lastHidden = cards.map(() => false)
     let vh = window.innerHeight
+    let vw = window.innerWidth
     let heights = []
     let stackHeights = []
     let raf = 0
@@ -87,13 +105,17 @@ export default function MobileFestive() {
     let lastScrollT = 0
     let sw = 0
     let swVel = 0
+    let lastSw = 999
     let finale = false
+    let resizeTimer = 0
 
     const measure = () => {
       vh = window.innerHeight
+      vw = window.innerWidth
       heights = cards.map((c) => c.offsetHeight)
       cards.forEach((c, i) => {
-        if (c.dataset.deck === 'sticky') c.style.top = `${Math.min(0, vh - heights[i])}px`
+        // lvh: address bar ghatne/badhne se value nahi badalti -> scroll ke beech relayout nahi
+        if (c.dataset.deck === 'sticky') c.style.top = `min(0px, calc(100lvh - ${heights[i]}px))`
       })
       stackHeights = stacks.map((items) => items.map((el) => el.offsetHeight))
       stacks.forEach((items) =>
@@ -111,7 +133,7 @@ export default function MobileFestive() {
       lastY = y
       lastT = now
 
-      /* ---------- READ ---------- */
+      /* ---------- READ (ek hi baar) ---------- */
       const tops = cards.map((c) => c.getBoundingClientRect().top)
       const stackTops = stacks.map((items) => items.map((el) => el.getBoundingClientRect().top))
       const maxScroll = Math.max(1, doc.scrollHeight - vh)
@@ -122,71 +144,67 @@ export default function MobileFestive() {
       swVel += (target - sw) * 0.09
       swVel *= 0.8
       sw += swVel
+      const swChanged = Math.abs(sw - lastSw) > 0.05
+      if (swChanged) lastSw = sw
 
-      /* ---------- WRITE: deck cards ---------- */
+      /* ---------- WRITE: deck cards (card par transform/CSS-var nahi -> bada layer re-raster nahi) ---------- */
       cards.forEach((c, i) => {
         const top = tops[i]
         const h = heights[i]
         const next = cards[i + 1]
         const nextTop = next && next.dataset.deck === 'sticky' ? tops[i + 1] : Infinity
-        const e = i === 0 ? 1 : easeOut(clamp((vh - top) / (vh * 0.62)))
         const cover = clamp(1 - nextTop / vh)
         const visible = top < vh && top + h > 0
 
-        // Sirf viewport ke paas wale cards ko transform do (mobile GPU memory bachane ke liye)
-        const near = top < vh * 1.02 && nextTop > -4
-        if (!reduced) {
-          if (near && cover > 0.001) {
-            // purana card deck me peeche "lean back" hota hai
-            const originY = Math.max(h - vh, 0) + vh * 0.12
-            c.style.transformOrigin = `50% ${originY}px`
-            c.style.transform = `perspective(1400px) rotateX(${-cover * 4}deg) scale(${1 - cover * 0.085})`
-          } else if (near && e < 0.999) {
-            // naya card neeche se "khade" hote hue aata hai (greeting card khulne jaisa)
-            c.style.transformOrigin = '50% 0px'
-            c.style.transform = `perspective(1100px) rotateX(${-(1 - e) * 12}deg) scale(${0.93 + e * 0.07})`
-          } else if (c.style.transform) {
-            c.style.transform = ''
+        // peeche dabte card par halka andhera: sirf shade layer ki opacity
+        const shade = shades[i]
+        if (shade) {
+          const o = Math.round(cover * 55) / 100
+          if (o !== lastShade[i]) {
+            lastShade[i] = o
+            shade.style.opacity = o
           }
         }
-        c.style.setProperty('--shade', (cover * 0.55).toFixed(3))
-        c.style.visibility = nextTop < -4 ? 'hidden' : ''
-        if (visible) c.style.setProperty('--sw', sw.toFixed(2))
+        // poori tarah dhake card ko hide karo (paint bachta hai)
+        const hide = nextTop < -4
+        if (hide !== lastHidden[i]) {
+          lastHidden[i] = hide
+          c.style.visibility = hide ? 'hidden' : ''
+        }
+        if (visible && swChanged && torans[i]) torans[i].style.setProperty('--sw', sw.toFixed(1))
 
         // card arrival: toran opens + anar sparks (sirf ek baar)
         if (i > 0 && !lit.has(i) && top < vh * 0.55) {
           lit.add(i)
           c.classList.add('deck-lit')
-          if (!reduced && top > -40) anar(clamp((top + 26) / vh, 0.05, 0.95))
+          if (!reduced && !LOW_END && top > -40) anar(clamp((top + 26) / vh, 0.05, 0.95))
         }
       })
 
       /* ---------- WRITE: inner card stacks ---------- */
-      stacks.forEach((items, s) => {
-        items.forEach((el, j) => {
-          const nt = stackTops[s][j + 1]
-          if (nt === undefined) return
-          const stick = STACK_TOP + (j + 1) * STACK_STEP
-          const c = clamp(1 - (nt - stick) / Math.max(1, stackHeights[s][j]))
-          el.style.setProperty('--c', c.toFixed(3))
-          if (!reduced) {
-            el.style.scale = `${1 - c * 0.06}`
-            el.style.rotate = `${(j % 2 ? 1 : -1) * c * 1.8}deg`
-          }
+      if (!reduced) {
+        stacks.forEach((items, s) => {
+          items.forEach((el, j) => {
+            const nt = stackTops[s][j + 1]
+            if (nt === undefined) return
+            const stick = STACK_TOP + (j + 1) * STACK_STEP
+            const c = clamp(1 - (nt - stick) / Math.max(1, stackHeights[s][j]))
+            el.style.scale = (1 - c * 0.06).toFixed(3)
+          })
         })
-      })
+      }
 
       /* ---------- WRITE: phuljhadi progress ---------- */
-      if (fillRef.current) fillRef.current.style.transform = `scaleX(${progress})`
+      if (fillRef.current) fillRef.current.style.transform = `scaleX(${progress.toFixed(4)})`
       if (headRef.current) {
-        headRef.current.style.transform = `translate3d(${progress * window.innerWidth}px,0,0)`
+        headRef.current.style.transform = `translate3d(${(progress * vw).toFixed(1)}px,0,0)`
         headRef.current.style.opacity = progress > 0.004 && progress < 0.999 ? '1' : '0'
         headRef.current.classList.toggle('is-burning', now - lastScrollT < 260)
       }
 
       if (!finale && progress > 0.985) {
         finale = true
-        if (!reduced) fireworks()
+        if (!reduced && !LOW_END) fireworks()
       }
 
       const settling = Math.abs(swVel) > 0.02 || Math.abs(sw - target) > 0.05
@@ -200,7 +218,19 @@ export default function MobileFestive() {
       lastScrollT = performance.now()
       kick()
     }
+    // Address bar se height badalti hai -> relayout nahi; sirf width badle to measure (debounced)
     const onResize = () => {
+      if (window.innerWidth !== vw) {
+        clearTimeout(resizeTimer)
+        resizeTimer = setTimeout(() => {
+          measure()
+          kick()
+        }, 120)
+      } else {
+        vh = window.innerHeight
+      }
+    }
+    const onBoxResize = () => {
       measure()
       kick()
     }
@@ -230,7 +260,7 @@ export default function MobileFestive() {
     })
     kick()
 
-    const ro = new ResizeObserver(onResize)
+    const ro = new ResizeObserver(onBoxResize)
     cards.forEach((c) => ro.observe(c))
     stacks.flat().forEach((el) => ro.observe(el))
     window.addEventListener('scroll', onScroll, { passive: true })
@@ -239,10 +269,10 @@ export default function MobileFestive() {
 
     // welcome: hero par halka sa celebration burst
     const hello =
-      !reduced && window.scrollY < 40
+      !reduced && !LOW_END && window.scrollY < 40
         ? setTimeout(() => {
-            confetti({
-              particleCount: 40,
+            getFire()({
+              particleCount: 24,
               spread: 360,
               startVelocity: 18,
               gravity: 0.6,
@@ -259,18 +289,21 @@ export default function MobileFestive() {
 
     return () => {
       cancelAnimationFrame(raf)
+      clearTimeout(resizeTimer)
       clearTimeout(hello)
       ro.disconnect()
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onResize)
       document.removeEventListener('click', onClick)
       // desktop par switch ho to sab inline styles saaf
-      cards.forEach((c) => {
+      cards.forEach((c, i) => {
         c.classList.remove('deck-lit')
-        for (const p of ['top', 'transform', 'transform-origin', 'visibility', '--shade', '--sw']) c.style.removeProperty(p)
+        for (const p of ['top', 'visibility']) c.style.removeProperty(p)
+        shades[i]?.style.removeProperty('opacity')
+        torans[i]?.style.removeProperty('--sw')
       })
       stacks.flat().forEach((el) => {
-        for (const p of ['top', 'scale', 'rotate', '--c']) el.style.removeProperty(p)
+        for (const p of ['top', 'scale']) el.style.removeProperty(p)
       })
     }
   }, [mobile, reduced])

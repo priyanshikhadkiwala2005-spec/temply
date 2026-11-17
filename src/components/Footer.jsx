@@ -60,7 +60,7 @@ export default function Footer() {
       </div>
       <div className="relative border-t border-white/10">
         <p className="mx-auto max-w-7xl px-5 py-6 text-sm text-mist md:px-8">
-          © 2026 Festivo. All rights reserved.{' '}
+          © 2026 Glovion. All rights reserved.{' '}
           <span className="festive-bright-text font-serif font-semibold">Celebrate. Create. Grow.</span>
         </p>
       </div>
