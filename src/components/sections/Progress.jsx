@@ -35,7 +35,7 @@ export default function Progress() {
           <Reveal><Eyebrow>Project progress</Eyebrow></Reveal>
           <Reveal delay={0.08}>
             <h2 className="mt-5 font-serif text-3xl sm:text-4xl md:text-[38px] lg:text-[46px] xl:text-5xl font-semibold leading-[1.15] tracking-tight text-plum md:whitespace-nowrap">
-              <span className="festive-animated-text inline-block">
+              <span className="festive-animated-text inline-block pb-[0.2em] -mb-[0.2em] pr-1">
                 Building the Experience, One Step at a Time
               </span>
             </h2>
