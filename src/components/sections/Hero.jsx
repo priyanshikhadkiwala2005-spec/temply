@@ -16,7 +16,7 @@ export default function Hero() {
   const yBlob = useTransform(scrollYProgress, [0, 1], [0, reduced ? 0 : 70])
 
   return (
-    <section id="home" ref={ref} className="relative overflow-hidden bg-pale pt-[72px] max-md:pt-4">
+    <section id="home" ref={ref} className="relative overflow-hidden bg-pale pt-[72px]">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_85%_30%,rgba(182,107,200,0.28),transparent),radial-gradient(40%_40%_at_0%_100%,rgba(238,221,245,0.9),transparent)]" />
       <div className="relative mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)] items-center gap-10 px-5 pb-20 pt-10 md:px-8 lg:min-h-[calc(100vh-72px)] lg:grid-cols-[1.05fr_1fr] lg:pb-16 lg:pt-6">
         <motion.div variants={stagger} initial="hidden" animate="show" className="relative z-10 min-w-0">
