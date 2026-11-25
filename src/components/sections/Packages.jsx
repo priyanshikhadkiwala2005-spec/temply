@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Sparkles, Crown, MapPin, Globe, CheckCircle2, ArrowUpRight, Check } from 'lucide-react'
+import { Sparkles, User, MapPin, Crown, CheckCircle2, ArrowUpRight, Check } from 'lucide-react'
 import Eyebrow from '../ui/Eyebrow'
 import { Reveal, Stagger } from '../ui/Reveal'
 import { item } from '../ui/motion'
@@ -22,7 +22,7 @@ const PLANS = [
     btnText: 'View plan details',
   },
   {
-    Icon: Crown,
+    Icon: User,
     theme: 'member',
     name: 'Member',
     subtitle: 'For individuals and growing referrers',
@@ -52,7 +52,7 @@ const PLANS = [
     btnText: 'View plan details',
   },
   {
-    Icon: Globe,
+    Icon: Crown,
     theme: 'premium',
     name: 'Premium',
     subtitle: 'Higher tier for established businesses',
