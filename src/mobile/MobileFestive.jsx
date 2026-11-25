@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react'
 import { useReducedMotion } from 'framer-motion'
-import confetti from 'canvas-confetti'
 import { useIsMobile } from './useIsMobile'
 
 /* ------------------------------------------------------------------ */
@@ -9,73 +8,15 @@ import { useIsMobile } from './useIsMobile'
 /*   1. Section cards ko deck ki tarah stack karta hai               */
 /*      (aane wala card tilt se khulta hai, purana peeche dabta hai)  */
 /*   2. Toran ko scroll speed ke saath jhulata hai                    */
-/*   3. Har naye card par "anar" sparks chhodta hai                   */
-/*   4. Features / Progress ke andar cards ka mini-stack chalata hai  */
-/*   5. Top par phuljhadi (sparkler) progress bar jalata hai          */
-/*   6. Page ke end par fireworks                                     */
+/*   3. Features / Progress ke andar cards ka mini-stack chalata hai  */
+/*   4. Top par phuljhadi (sparkler) progress bar jalata hai          */
 /*  Desktop par ye component kuch bhi nahi karta.                     */
 /* ------------------------------------------------------------------ */
 
-const FEST = ['#f59e0b', '#fbbf24', '#fbbf24', '#6aa8ff', '#1f5ae6', '#ffffff', '#22d3ee']
 const STACK_TOP = 18
 const STACK_STEP = 16
 
-// Low-end phone? Bhaari particle effects skip karo taaki scroll smooth rahe
-const LOW_END =
-  typeof navigator !== 'undefined' &&
-  ((navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) ||
-    (navigator.deviceMemory && navigator.deviceMemory <= 4))
-
-// Confetti alag thread (OffscreenCanvas worker) par chalta hai -> main thread free
-let fire = null
-function getFire() {
-  if (!fire) fire = confetti.create(undefined, { resize: true, useWorker: true, disableForReducedMotion: true })
-  return fire
-}
-
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v))
-
-function anar(y) {
-  const f = getFire()
-  const base = {
-    particleCount: 9,
-    spread: 34,
-    startVelocity: 34,
-    gravity: 1.05,
-    ticks: 90,
-    scalar: 0.72,
-    colors: FEST,
-    shapes: ['star', 'circle'],
-    zIndex: 80,
-    disableForReducedMotion: true,
-  }
-  f({ ...base, angle: 72, origin: { x: 0.08, y } })
-  f({ ...base, angle: 108, origin: { x: 0.92, y } })
-}
-
-function fireworks() {
-  const shot = (x, y, delay) =>
-    setTimeout(
-      () =>
-        getFire()({
-          particleCount: 28,
-          spread: 360,
-          startVelocity: 24,
-          gravity: 0.7,
-          ticks: 160,
-          scalar: 0.8,
-          origin: { x, y },
-          colors: FEST,
-          shapes: ['star', 'circle'],
-          zIndex: 80,
-          disableForReducedMotion: true,
-        }),
-      delay,
-    )
-  shot(0.25, 0.3, 0)
-  shot(0.75, 0.22, 380)
-  shot(0.5, 0.42, 760)
-}
 
 export default function MobileFestive() {
   const mobile = useIsMobile()
@@ -173,11 +114,10 @@ export default function MobileFestive() {
         }
         if (visible && swChanged && torans[i]) torans[i].style.setProperty('--sw', sw.toFixed(1))
 
-        // card arrival: toran opens + anar sparks (sirf ek baar)
+        // card arrival: toran opens (sirf ek baar)
         if (i > 0 && !lit.has(i) && top < vh * 0.55) {
           lit.add(i)
           c.classList.add('deck-lit')
-          if (!reduced && !LOW_END && top > -40) anar(clamp((top + 26) / vh, 0.05, 0.95))
         }
       })
 
@@ -204,7 +144,6 @@ export default function MobileFestive() {
 
       if (!finale && progress > 0.985) {
         finale = true
-        if (!reduced && !LOW_END) fireworks()
       }
 
       const settling = Math.abs(swVel) > 0.02 || Math.abs(sw - target) > 0.05
@@ -267,30 +206,9 @@ export default function MobileFestive() {
     window.addEventListener('resize', onResize)
     document.addEventListener('click', onClick)
 
-    // welcome: hero par halka sa celebration burst
-    const hello =
-      !reduced && !LOW_END && window.scrollY < 40
-        ? setTimeout(() => {
-            getFire()({
-              particleCount: 24,
-              spread: 360,
-              startVelocity: 18,
-              gravity: 0.6,
-              ticks: 140,
-              scalar: 0.7,
-              origin: { x: 0.78, y: 0.26 },
-              colors: FEST,
-              shapes: ['star', 'circle'],
-              zIndex: 80,
-              disableForReducedMotion: true,
-            })
-          }, 1100)
-        : 0
-
     return () => {
       cancelAnimationFrame(raf)
       clearTimeout(resizeTimer)
-      clearTimeout(hello)
       ro.disconnect()
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onResize)

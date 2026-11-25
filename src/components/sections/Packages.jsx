@@ -164,13 +164,12 @@ export default function Packages() {
           </Reveal>
         </div>
 
-        <Stagger data-stack="" className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 max-md:mt-10 max-md:gap-5">
+        <Stagger className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 max-md:mt-10 max-md:gap-5">
           {PLANS.map(({ Icon, theme, price, name, subtitle, validity, features, badge, popular, btnText }) => {
             const t = THEMES[theme]
             return (
             <motion.article
               key={name}
-              data-stack-item=""
               variants={item}
               whileHover={{ y: -8 }}
               transition={spring}
