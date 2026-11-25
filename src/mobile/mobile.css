@@ -162,10 +162,8 @@
     display: none !important;
   }
   /* background-position wali infinite animations har frame repaint karti hain -> static */
-  .festive-animated-text,
   .festive-shimmer-text,
   .festive-animated-bg,
-  .festive-bright-text,
   .festive-progress-flow {
     animation: none !important;
     will-change: auto !important;

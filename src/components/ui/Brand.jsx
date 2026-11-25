@@ -14,9 +14,7 @@ export default function Brand({ light = false }) {
       />
       <span
         className={`font-serif text-2xl font-bold leading-none tracking-tight ${
-          light
-            ? 'bg-gradient-to-r from-white via-sky-200 to-cyan-300 bg-clip-text text-transparent'
-            : 'bg-gradient-to-r from-[#0a2a8f] via-[#2563eb] to-[#0ea5e9] bg-clip-text text-transparent'
+          light ? 'festive-bright-text' : 'festive-animated-text'
         }`}
       >
         Glovion
