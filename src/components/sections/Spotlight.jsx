@@ -16,7 +16,7 @@ function Ring({ value = 0.4 }) {
   return (
     <div className="relative inline-flex items-center justify-center">
       <svg width="110" height="110" viewBox="0 0 110 110" role="img" aria-label="Sample referral progress, 2 of 5">
-        <circle cx="55" cy="55" r={r} fill="none" stroke="#eeddf5" strokeWidth="10" />
+        <circle cx="55" cy="55" r={r} fill="none" stroke="#dbe9ff" strokeWidth="10" />
         <motion.circle
           cx="55" cy="55" r={r} fill="none" strokeWidth="10" strokeLinecap="round"
           className="festive-stroke-cycle"
@@ -41,7 +41,7 @@ export default function Spotlight() {
       <div className="mx-auto grid max-w-7xl items-center gap-16 px-5 md:px-8 lg:grid-cols-[1.1fr_0.9fr]">
         {/* layered UI composition */}
         <div className="relative order-2 mx-auto h-[500px] w-full max-w-[560px] max-sm:h-[590px] sm:h-[560px] lg:order-1" style={{ perspective: 1400 }}>
-          <Blob className="left-[4%] top-[8%] h-[80%] w-[86%] opacity-70" from="#eeddf5" to="#b66bc8" duration={26} />
+          <Blob className="left-[4%] top-[8%] h-[80%] w-[86%] opacity-70" from="#dbe9ff" to="#6aa8ff" duration={26} />
 
           <motion.div
             initial={{ opacity: 0, y: 40, rotateY: -18, rotateX: 6 }}
@@ -51,7 +51,7 @@ export default function Spotlight() {
             className="absolute left-0 top-4 w-[78%] sm:w-[72%]"
           >
             <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-              className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-plum via-grape to-brand p-6 text-white shadow-[0_40px_70px_-30px_rgba(84,36,95,0.8)] sm:p-7">
+              className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-plum via-grape to-brand p-6 text-white shadow-[0_40px_70px_-30px_rgba(10,42,143,0.8)] sm:p-7">
               <div aria-hidden="true" className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-lav/30" />
               <Crown className="festive-color-cycle drop-shadow-[0_0_8px_rgba(251,191,36,0.6)]" size={26} aria-hidden="true" />
               <p className="festive-animated-text mt-10 inline-block pb-1 pr-2 font-serif text-2xl font-semibold sm:text-3xl">
@@ -73,7 +73,7 @@ export default function Spotlight() {
             className="absolute bottom-0 right-0 w-[68%] sm:w-[58%]"
           >
             <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-              className="rounded-2xl border border-white bg-white/90 p-5 shadow-[0_30px_60px_-25px_rgba(84,36,95,0.55)]">
+              className="rounded-2xl border border-white bg-white/90 p-5 shadow-[0_30px_60px_-25px_rgba(10,42,143,0.55)]">
               <p className="festive-animated-text inline-block text-xs font-bold uppercase tracking-wider">
                 Rewards dashboard
               </p>
@@ -101,7 +101,7 @@ export default function Spotlight() {
             className="absolute bottom-[38%] left-[2%] z-10 max-sm:bottom-auto max-sm:top-[262px] sm:bottom-[36%] sm:left-[6%]"
           >
             <motion.div animate={{ y: [0, -9, 0] }} transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-              className="flex items-center gap-3 rounded-2xl bg-white p-3 pr-5 shadow-[0_25px_50px_-20px_rgba(84,36,95,0.6)]">
+              className="flex items-center gap-3 rounded-2xl bg-white p-3 pr-5 shadow-[0_25px_50px_-20px_rgba(10,42,143,0.6)]">
               <div className="scale-75 sm:scale-90" style={{ margin: '-10px' }}><Ring value={0.4} /></div>
               <div>
                 <p className="text-xs font-semibold uppercase tracking-wider text-muted">Referrals</p>

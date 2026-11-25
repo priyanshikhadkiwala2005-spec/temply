@@ -10,18 +10,18 @@ const FEATURES = [
     Icon: Palette,
     title: 'Festival Post Editor',
     text: 'Create festival-themed promotional posts using templates, text, and sharing options.',
-    tint: 'bg-purple-50 text-purple-600',
-    bar: 'bg-gradient-to-r from-purple-500 via-fuchsia-500 to-indigo-500',
-    shadow: 'shadow-[0_16px_40px_-12px_rgba(168,85,247,0.22)] hover:shadow-[0_24px_50px_-12px_rgba(168,85,247,0.38)] hover:border-purple-300',
+    tint: 'bg-blue-50 text-blue-600',
+    bar: 'bg-gradient-to-r from-blue-500 via-sky-500 to-blue-500',
+    shadow: 'shadow-[0_16px_40px_-12px_rgba(96,165,250,0.22)] hover:shadow-[0_24px_50px_-12px_rgba(96,165,250,0.38)] hover:border-blue-300',
   },
   {
     tab: 'membership',
     Icon: BadgeCheck,
     title: 'Business Membership',
     text: 'Explore membership plans and business profile benefits.',
-    tint: 'bg-fuchsia-50 text-fuchsia-600',
-    bar: 'bg-gradient-to-r from-fuchsia-500 via-pink-500 to-rose-500',
-    shadow: 'shadow-[0_16px_40px_-12px_rgba(236,72,153,0.22)] hover:shadow-[0_24px_50px_-12px_rgba(236,72,153,0.38)] hover:border-pink-300',
+    tint: 'bg-sky-50 text-sky-600',
+    bar: 'bg-gradient-to-r from-sky-500 via-indigo-500 to-cyan-500',
+    shadow: 'shadow-[0_16px_40px_-12px_rgba(99,102,241,0.22)] hover:shadow-[0_24px_50px_-12px_rgba(99,102,241,0.38)] hover:border-indigo-300',
   },
   {
     tab: 'rewards',
@@ -29,7 +29,7 @@ const FEATURES = [
     title: 'Points & Rewards',
     text: 'View reward points, redemption concepts, and available benefits.',
     tint: 'bg-amber-50 text-amber-600',
-    bar: 'bg-gradient-to-r from-amber-400 via-orange-400 to-rose-500',
+    bar: 'bg-gradient-to-r from-amber-400 via-amber-400 to-cyan-500',
     shadow: 'shadow-[0_16px_40px_-12px_rgba(245,158,11,0.22)] hover:shadow-[0_24px_50px_-12px_rgba(245,158,11,0.38)] hover:border-amber-300',
   },
   {
@@ -37,9 +37,9 @@ const FEATURES = [
     Icon: Share2,
     title: 'Referral Network',
     text: 'Present a referral system and referral progress interface.',
-    tint: 'bg-rose-50 text-rose-600',
-    bar: 'bg-gradient-to-r from-rose-500 via-pink-500 to-purple-500',
-    shadow: 'shadow-[0_16px_40px_-12px_rgba(225,29,72,0.22)] hover:shadow-[0_24px_50px_-12px_rgba(225,29,72,0.38)] hover:border-rose-300',
+    tint: 'bg-cyan-50 text-cyan-600',
+    bar: 'bg-gradient-to-r from-cyan-500 via-indigo-500 to-blue-500',
+    shadow: 'shadow-[0_16px_40px_-12px_rgba(6,182,212,0.22)] hover:shadow-[0_24px_50px_-12px_rgba(6,182,212,0.38)] hover:border-cyan-300',
   },
 ]
 
@@ -48,10 +48,10 @@ export default function Features({ onPreview }) {
     <section id="features" className="relative overflow-hidden bg-pale pt-20 pb-12 sm:pt-24 sm:pb-14 lg:pt-28 lg:pb-16">
       {/* Multi-color ambient background shadows & glows (SS 2 style) */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -left-20 top-12 h-[460px] w-[460px] rounded-full bg-gradient-to-br from-fuchsia-400/22 via-purple-500/18 to-transparent blur-3xl" />
-        <div className="absolute -right-20 top-1/4 h-[440px] w-[440px] rounded-full bg-gradient-to-bl from-amber-300/22 via-orange-400/18 to-transparent blur-3xl" />
-        <div className="absolute -bottom-20 left-1/3 h-[480px] w-[480px] rounded-full bg-gradient-to-tr from-rose-400/20 via-pink-500/18 to-transparent blur-3xl" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_25%,rgba(192,38,211,0.08),transparent_70%)]" />
+        <div className="absolute -left-20 top-12 h-[460px] w-[460px] rounded-full bg-gradient-to-br from-sky-400/22 via-blue-500/18 to-transparent blur-3xl" />
+        <div className="absolute -right-20 top-1/4 h-[440px] w-[440px] rounded-full bg-gradient-to-bl from-amber-300/22 via-amber-400/18 to-transparent blur-3xl" />
+        <div className="absolute -bottom-20 left-1/3 h-[480px] w-[480px] rounded-full bg-gradient-to-tr from-cyan-400/20 via-indigo-500/18 to-transparent blur-3xl" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_25%,rgba(14,165,233,0.08),transparent_70%)]" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-5 md:px-8">
@@ -89,7 +89,7 @@ export default function Features({ onPreview }) {
               }`}
             >
               <span
-                className="festive-progress-flow absolute inset-x-0 top-0 h-2 shadow-[0_0_10px_rgba(236,72,153,0.35)]"
+                className="festive-progress-flow absolute inset-x-0 top-0 h-2 shadow-[0_0_10px_rgba(99,102,241,0.35)]"
                 style={{ animationDelay: `${-i * 0.75}s` }}
                 aria-hidden="true"
               />

@@ -40,14 +40,14 @@ export default function Showcase({ active, setActive }) {
   return (
     <section
       id="showcase"
-      className="on-dark relative flex flex-col justify-center overflow-hidden bg-[radial-gradient(ellipse_at_90%_20%,rgba(253,230,138,0.28)_0%,transparent_50%),radial-gradient(ellipse_at_15%_85%,rgba(244,63,94,0.3)_0%,transparent_50%),linear-gradient(135deg,#701a75_0%,#86198f_20%,#a21caf_42%,#c026d3_62%,#db2777_78%,#f43f5e_88%,#fb923c_95%,#fde68a_100%)] py-10 max-md:pt-16 max-md:pb-12 sm:py-14 lg:min-h-screen text-white"
+      className="on-dark relative flex flex-col justify-center overflow-hidden bg-[radial-gradient(ellipse_at_90%_8%,rgba(251,191,36,0.42)_0%,transparent_42%),radial-gradient(ellipse_at_8%_10%,rgba(168,85,247,0.50)_0%,transparent_46%),radial-gradient(ellipse_at_92%_60%,rgba(236,72,153,0.38)_0%,transparent_44%),radial-gradient(ellipse_at_10%_92%,rgba(34,211,238,0.50)_0%,transparent_50%),radial-gradient(ellipse_at_85%_95%,rgba(52,211,153,0.45)_0%,transparent_46%),radial-gradient(ellipse_at_50%_50%,rgba(37,99,235,0.50)_0%,transparent_60%),linear-gradient(160deg,#1e1b6e_0%,#1d3fb8_30%,#2563eb_55%,#0ea5e9_80%,#5eead4_100%)] py-10 max-md:pt-16 max-md:pb-12 sm:py-14 lg:min-h-screen text-white"
     >
       <div aria-hidden="true" className="grain pointer-events-none absolute inset-0 opacity-25" />
 
       {/* Multi-color ambient background glow shadows */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -left-20 top-20 h-96 w-96 rounded-full bg-fuchsia-400/25 blur-3xl"
+        className="pointer-events-none absolute -left-20 top-20 h-96 w-96 rounded-full bg-sky-400/25 blur-3xl"
       />
       <div
         aria-hidden="true"
@@ -55,18 +55,26 @@ export default function Showcase({ active, setActive }) {
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/3 bottom-10 h-80 w-80 rounded-full bg-rose-400/20 blur-3xl"
+        className="pointer-events-none absolute left-1/3 bottom-10 h-80 w-80 rounded-full bg-cyan-300/20 blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute right-1/4 -top-10 h-80 w-80 rounded-full bg-fuchsia-400/25 blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-10 bottom-1/3 h-72 w-72 rounded-full bg-violet-400/25 blur-3xl"
       />
 
       {/* Decorative soft colorful morphing blobs */}
       <Blob
         className="-left-32 top-10 h-[420px] w-[420px] opacity-25"
-        gradient="linear-gradient(135deg, #c026d3 0%, #e11d48 50%, #f43f5e 100%)"
+        gradient="linear-gradient(135deg, #38bdf8 0%, #2563eb 55%, #6366f1 100%)"
         duration={28}
       />
       <Blob
         className="-right-24 bottom-0 h-[360px] w-[360px] opacity-25"
-        gradient="linear-gradient(135deg, #ec4899 0%, #fb923c 60%, #fde68a 100%)"
+        gradient="linear-gradient(135deg, #22d3ee 0%, #fbbf24 70%, #fde68a 100%)"
         duration={22}
       />
 

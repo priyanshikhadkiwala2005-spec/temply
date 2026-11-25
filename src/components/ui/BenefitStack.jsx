@@ -65,7 +65,7 @@ function Counter() {
       <p className="mt-0.5 text-[9px] font-medium text-muted">sample pts</p>
       <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-white shadow-inner">
         <div
-          className="festive-progress-flow h-full rounded-full transition-[width] duration-100 shadow-[0_0_8px_rgba(244,63,94,0.4)]"
+          className="festive-progress-flow h-full rounded-full transition-[width] duration-100 shadow-[0_0_8px_rgba(34,211,238,0.4)]"
           style={{ width: `${n}%` }}
         />
       </div>
@@ -102,7 +102,7 @@ export default function BenefitStack() {
             <motion.div
               animate={{ y: [0, i % 2 ? 6 : -6, 0] }}
               transition={{ duration: 5 + i, repeat: Infinity, ease: 'easeInOut' }}
-              className="flex items-center gap-4 rounded-2xl border border-white bg-white p-3 pr-4 shadow-[0_25px_45px_-22px_rgba(84,36,95,0.55)]"
+              className="flex items-center gap-4 rounded-2xl border border-white bg-white p-3 pr-4 shadow-[0_25px_45px_-22px_rgba(10,42,143,0.55)]"
             >
               <Visual />
               <div className="min-w-0">

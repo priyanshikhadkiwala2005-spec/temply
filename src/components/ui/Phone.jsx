@@ -18,9 +18,9 @@ export default function Phone({ children, label, className = '' }) {
         className="absolute left-0 top-0 origin-top-left"
         style={{ width: W, height: H, transform: 'scale(var(--ps, 1))' }}
       >
-        <div className="relative h-full w-full rounded-[44px] bg-[#1d1024] p-2 shadow-[0_40px_80px_-30px_rgba(84,36,95,0.7),0_0_0_1px_rgba(255,255,255,0.12)_inset]">
+        <div className="relative h-full w-full rounded-[44px] bg-[#071544] p-2 shadow-[0_40px_80px_-30px_rgba(10,42,143,0.7),0_0_0_1px_rgba(255,255,255,0.12)_inset]">
           <div className="relative h-full w-full overflow-hidden rounded-[36px] bg-white">
-            <div className="absolute left-1/2 top-2 z-20 h-[22px] w-[78px] -translate-x-1/2 rounded-full bg-[#1d1024]" />
+            <div className="absolute left-1/2 top-2 z-20 h-[22px] w-[78px] -translate-x-1/2 rounded-full bg-[#071544]" />
             {children}
           </div>
         </div>

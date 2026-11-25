@@ -10,8 +10,8 @@ import { Reveal } from '../ui/Reveal'
 
 const celebrate = () => {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-  // Pure brand purple, lavender and white palette (strictly no gold)
-  const colors = ['#54245f', '#843da0', '#b66bc8', '#eeddf5', '#ffffff']
+  // Brand blue, sky and white palette
+  const colors = ['#0a2a8f', '#1f5ae6', '#6aa8ff', '#dbe9ff', '#ffffff']
   confetti({ particleCount: 95, spread: 80, origin: { x: 0.3, y: 0.6 }, colors })
   confetti({ particleCount: 95, spread: 80, origin: { x: 0.7, y: 0.6 }, colors })
 }
@@ -34,7 +34,7 @@ function PosterFace({ p, priority }) {
   return (
     <div
       className="relative h-full w-full overflow-hidden rounded-[20px]"
-      style={{ background: 'linear-gradient(160deg,#843da0 0%,#54245f 55%,#3b1348 100%)' }}
+      style={{ background: 'linear-gradient(160deg,#1f5ae6 0%,#0a2a8f 55%,#0a1f6b 100%)' }}
     >
       <img
         src={p.src}
@@ -216,20 +216,20 @@ export default function FinalCTA() {
   return (
     <section className="bg-pale px-5 pb-20 max-md:pt-16 md:px-8 lg:pb-28">
       {/* Container: Vibrant Festive Gradient with Soft Light Orange & Warm Glow */}
-      <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] bg-[radial-gradient(ellipse_at_92%_25%,rgba(253,230,138,0.2)_0%,transparent_50%),radial-gradient(ellipse_at_15%_85%,rgba(244,63,94,0.25)_0%,transparent_50%),linear-gradient(135deg,#3b0764_0%,#581c87_22%,#701a75_46%,#a21caf_66%,#db2777_80%,#fb7185_89%,#fdba74_96%,#fde68a_100%)] p-1 shadow-[0_30px_70px_-20px_rgba(162,28,175,0.45)]">
+      <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] bg-[radial-gradient(ellipse_at_92%_8%,rgba(251,191,36,0.40)_0%,transparent_42%),radial-gradient(ellipse_at_6%_6%,rgba(168,85,247,0.48)_0%,transparent_46%),radial-gradient(ellipse_at_70%_55%,rgba(236,72,153,0.32)_0%,transparent_44%),radial-gradient(ellipse_at_96%_100%,rgba(52,211,153,0.50)_0%,transparent_46%),radial-gradient(ellipse_at_12%_95%,rgba(34,211,238,0.48)_0%,transparent_50%),linear-gradient(135deg,#1e1b6e_0%,#1d3fb8_28%,#2563eb_54%,#0ea5e9_82%,#5eead4_100%)] p-1 shadow-[0_30px_70px_-20px_rgba(29,78,216,0.45)]">
         {/* Subtle Ambient Grain & Festive Colorful Glow Flares */}
         <div aria-hidden="true" className="grain absolute inset-0 opacity-25" />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -left-20 -top-20 h-80 w-80 rounded-full bg-fuchsia-500/25 blur-3xl"
+          className="pointer-events-none absolute -left-20 -top-20 h-80 w-80 rounded-full bg-violet-500/30 blur-3xl"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -bottom-16 -right-16 h-64 w-64 rounded-full bg-amber-300/15 blur-3xl"
+          className="pointer-events-none absolute -bottom-16 -right-16 h-64 w-64 rounded-full bg-amber-300/25 blur-3xl"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute left-1/3 top-0 h-72 w-72 rounded-full bg-rose-500/15 blur-3xl"
+          className="pointer-events-none absolute left-1/3 top-0 h-72 w-72 rounded-full bg-fuchsia-400/20 blur-3xl"
         />
 
         <div className="relative grid items-center gap-12 px-6 py-12 sm:px-10 sm:py-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:px-14 lg:py-18">
@@ -244,9 +244,9 @@ export default function FinalCTA() {
             </Reveal>
 
             <Reveal delay={0.08}>
-              <h2 className="mt-4 font-serif text-3xl font-semibold leading-[1.08] tracking-tight text-white sm:text-4xl md:text-5xl lg:text-[3.25rem]">
+              <h2 className="festive-shimmer-text mt-4 inline-block pb-1 pr-2 font-serif text-3xl font-semibold leading-[1.08] tracking-tight sm:text-4xl md:text-5xl lg:text-[3.25rem]">
                 One Platform.{' '}
-                <span className="text-mist underline decoration-white/40 underline-offset-8">
+                <span className="underline decoration-white/40 underline-offset-8">
                   Complete Growth.
                 </span>
               </h2>

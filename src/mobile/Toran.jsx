@@ -5,9 +5,9 @@
 /* ------------------------------------------------------------------ */
 
 const TONES = {
-  marigold: { a: '#f59e0b', b: '#fb923c', c: '#fbbf24', rope: '#b45309' },
-  rose: { a: '#e8618c', b: '#f59e0b', c: '#f9a8d4', rope: '#9d174d' },
-  lavender: { a: '#b66bc8', b: '#f59e0b', c: '#eeddf5', rope: '#843da0' },
+  marigold: { a: '#f59e0b', b: '#fbbf24', c: '#fbbf24', rope: '#b45309' },
+  rose: { a: '#22d3ee', b: '#f59e0b', c: '#c7d2fe', rope: '#3730a3' },
+  lavender: { a: '#6aa8ff', b: '#f59e0b', c: '#dbe9ff', rope: '#1f5ae6' },
 }
 
 const N = 9 // strands

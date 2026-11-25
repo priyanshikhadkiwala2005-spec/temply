@@ -57,7 +57,7 @@ export default function Progress() {
               variants={item}
               className={`relative overflow-hidden rounded-2xl p-7 pl-12 md:pl-7 ${
                 on
-                  ? 'bg-gradient-to-br from-plum to-brand text-white shadow-[0_30px_60px_-30px_rgba(84,36,95,0.8),0_0_25px_rgba(236,72,153,0.18)]'
+                  ? 'bg-gradient-to-br from-plum to-brand text-white shadow-[0_30px_60px_-30px_rgba(10,42,143,0.8),0_0_25px_rgba(99,102,241,0.18)]'
                   : 'border border-brand/15 bg-white'
               }`}
             >
@@ -78,7 +78,7 @@ export default function Progress() {
               </div>
 
               {/* Colorful animated accent line above the title */}
-              <div className="festive-animated-bg mt-5 mb-2.5 h-1 w-14 rounded-full shadow-[0_0_8px_rgba(236,72,153,0.6)]" />
+              <div className="festive-animated-bg mt-5 mb-2.5 h-1 w-14 rounded-full shadow-[0_0_8px_rgba(99,102,241,0.6)]" />
 
               <h3 className="font-serif text-2xl font-semibold leading-snug">
                 <span className="festive-bright-text inline-block">{title}</span>

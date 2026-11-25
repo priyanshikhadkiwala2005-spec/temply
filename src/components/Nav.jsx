@@ -29,7 +29,7 @@ function Row({ hidden = false }) {
           <div className="flex items-center gap-4">
             {item.src && (
               <span
-                className="block h-16 w-[46px] shrink-0 overflow-hidden rounded-lg bg-mist shadow-[0_10px_22px_-10px_rgba(84,36,95,0.55)] ring-1 ring-plum/10 transition-transform duration-300 hover:scale-110"
+                className="block h-16 w-[46px] shrink-0 overflow-hidden rounded-lg bg-mist shadow-[0_10px_22px_-10px_rgba(10,42,143,0.55)] ring-1 ring-plum/10 transition-transform duration-300 hover:scale-110"
                 style={{ transform: `rotate(${i % 4 === 0 ? -4 : 4}deg)` }}
               >
                 <img

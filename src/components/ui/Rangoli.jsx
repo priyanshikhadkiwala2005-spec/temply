@@ -34,8 +34,8 @@ export default function Rangoli() {
         <svg viewBox="0 0 400 400" className="h-full w-full overflow-visible" aria-hidden="true">
           <defs>
             <radialGradient id="rg-core" cx="50%" cy="40%" r="70%">
-              <stop offset="0" stopColor="#843da0" />
-              <stop offset="1" stopColor="#54245f" />
+              <stop offset="0" stopColor="#1f5ae6" />
+              <stop offset="1" stopColor="#0a2a8f" />
             </radialGradient>
             <radialGradient id="rg-glow" cx="50%" cy="50%" r="50%">
               <stop offset="0" stopColor="#fcd34d" stopOpacity="0.55" />
@@ -44,13 +44,13 @@ export default function Rangoli() {
           </defs>
 
           <motion.circle
-            cx={C} cy={C} r="190" fill="none" stroke="#b66bc8" strokeWidth="1.2" strokeDasharray="3 7"
+            cx={C} cy={C} r="190" fill="none" stroke="#6aa8ff" strokeWidth="1.2" strokeDasharray="3 7"
             {...spin(90, -1)}
           />
 
-          <motion.g {...spin(80)}>{ring(12, 145, 16, 46, ['#b66bc8', '#843da0'])}</motion.g>
-          <motion.g {...spin(60, -1)}>{ring(16, 102, 12, 30, ['#54245f', '#eeddf5'], { stroke: '#843da0', strokeWidth: 1 })}</motion.g>
-          <motion.g {...spin(45)}>{ring(8, 66, 13, 26, ['#fcd34d', '#b66bc8'])}</motion.g>
+          <motion.g {...spin(80)}>{ring(12, 145, 16, 46, ['#6aa8ff', '#1f5ae6'])}</motion.g>
+          <motion.g {...spin(60, -1)}>{ring(16, 102, 12, 30, ['#0a2a8f', '#dbe9ff'], { stroke: '#1f5ae6', strokeWidth: 1 })}</motion.g>
+          <motion.g {...spin(45)}>{ring(8, 66, 13, 26, ['#fcd34d', '#6aa8ff'])}</motion.g>
 
           {[...Array(24)].map((_, i) => {
             const a = (i * 15 * Math.PI) / 180
@@ -60,7 +60,7 @@ export default function Rangoli() {
                 cx={C + 185 * Math.cos(a)}
                 cy={C + 185 * Math.sin(a)}
                 r="3.5"
-                fill={i % 2 ? '#843da0' : '#fcd34d'}
+                fill={i % 2 ? '#1f5ae6' : '#fcd34d'}
                 animate={{ opacity: [0.25, 1, 0.25], scale: [0.8, 1.4, 0.8] }}
                 transition={{ duration: 2.4, delay: i * 0.1, repeat: Infinity, ease: 'easeInOut' }}
                 style={{ transformBox: 'fill-box', transformOrigin: 'center' }}
@@ -69,7 +69,7 @@ export default function Rangoli() {
           })}
 
           <circle cx={C} cy={C} r="70" fill="url(#rg-glow)" />
-          <circle cx={C} cy={C} r="40" fill="url(#rg-core)" stroke="#eeddf5" strokeWidth="2" />
+          <circle cx={C} cy={C} r="40" fill="url(#rg-core)" stroke="#dbe9ff" strokeWidth="2" />
           <path d="M178 214 Q200 236 222 214 Z" fill="#fcd34d" />
           <motion.path
             d="M200 176 C211 190 212 200 200 210 C188 200 189 190 200 176 Z"

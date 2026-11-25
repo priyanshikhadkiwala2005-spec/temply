@@ -42,7 +42,7 @@ function Col({ title, links }) {
 export default function Footer() {
   return (
     <footer className="on-dark relative overflow-hidden bg-plum text-white">
-      <div className="festive-animated-bg absolute inset-x-0 top-0 h-1 shadow-[0_0_12px_rgba(236,72,153,0.5)]" />
+      <div className="festive-animated-bg absolute inset-x-0 top-0 h-1 shadow-[0_0_12px_rgba(99,102,241,0.5)]" />
       <div aria-hidden="true" className="grain pointer-events-none absolute inset-0 opacity-30" />
       <svg aria-hidden="true" className="absolute -bottom-16 -right-16 h-72 w-72 text-white/[0.06]" viewBox="0 0 32 32" fill="currentColor">
         <path d="M16 1l3.6 11.4L31 16l-11.4 3.6L16 31l-3.6-11.4L1 16l11.4-3.6z" />

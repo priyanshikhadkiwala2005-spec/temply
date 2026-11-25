@@ -7,7 +7,7 @@ import { item } from '../ui/motion'
 
 function MiniCreate() {
   return (
-    <div className="relative h-28 overflow-hidden rounded-xl bg-[radial-gradient(ellipse_at_85%_15%,rgba(253,230,138,0.4)_0%,transparent_50%),linear-gradient(135deg,#701a75_0%,#c026d3_35%,#e11d48_70%,#f97316_100%)] p-3 shadow-md">
+    <div className="relative h-28 overflow-hidden rounded-xl bg-[radial-gradient(ellipse_at_85%_15%,rgba(253,230,138,0.4)_0%,transparent_50%),linear-gradient(135deg,#701a75_0%,#0ea5e9_35%,#06b6d4_70%,#f59e0b_100%)] p-3 shadow-md">
       <div className="absolute -right-4 -top-4 h-14 w-14 rounded-full bg-white/20 blur-sm" />
       <p className="font-serif text-lg font-semibold text-white drop-shadow-xs">Happy Diwali</p>
       <div className="mt-2 flex gap-1.5">
@@ -16,7 +16,7 @@ function MiniCreate() {
         ))}
       </div>
       <div className="mt-6 inline-flex items-center gap-1.5 rounded-md bg-white/95 px-2 py-1 text-[10px] font-semibold text-plum shadow-xs">
-        <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-rose-500 to-amber-400" />
+        <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-amber-400" />
         Your Business
       </div>
     </div>
@@ -55,7 +55,7 @@ function MiniReward() {
           whileInView={{ width: '60%' }}
           viewport={{ once: true }}
           transition={{ duration: 1.2, delay: 0.4 }}
-          className="h-2 rounded-full bg-gradient-to-r from-purple-600 via-fuchsia-500 via-rose-500 to-amber-400 shadow-[0_0_8px_rgba(236,72,153,0.45)]"
+          className="h-2 rounded-full bg-gradient-to-r from-blue-600 via-sky-500 via-cyan-500 to-amber-400 shadow-[0_0_8px_rgba(99,102,241,0.45)]"
         />
       </div>
       <p className="mt-2 text-[10px] text-muted">Sample progress to next reward</p>
@@ -110,17 +110,17 @@ function Diya({ on }) {
 
 const STEP_ACCENTS = [
   {
-    dotBg: 'bg-gradient-to-br from-purple-600 to-fuchsia-600',
-    dotShadow: 'shadow-[0_0_0_2px_#c026d3,0_0_12px_rgba(192,38,211,0.65)]',
+    dotBg: 'bg-gradient-to-br from-blue-600 to-sky-600',
+    dotShadow: 'shadow-[0_0_0_2px_#0ea5e9,0_0_12px_rgba(14,165,233,0.65)]',
     delay: '0s',
   },
   {
-    dotBg: 'bg-gradient-to-br from-fuchsia-500 to-rose-500',
-    dotShadow: 'shadow-[0_0_0_2px_#f43f5e,0_0_12px_rgba(244,63,94,0.65)]',
+    dotBg: 'bg-gradient-to-br from-sky-500 to-cyan-500',
+    dotShadow: 'shadow-[0_0_0_2px_#22d3ee,0_0_12px_rgba(34,211,238,0.65)]',
     delay: '-2s',
   },
   {
-    dotBg: 'bg-gradient-to-br from-rose-500 to-amber-400',
+    dotBg: 'bg-gradient-to-br from-cyan-500 to-amber-400',
     dotShadow: 'shadow-[0_0_0_2px_#f59e0b,0_0_12px_rgba(245,158,11,0.65)]',
     delay: '-4s',
   },
@@ -160,14 +160,14 @@ export default function HowItWorks() {
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute left-0 right-0 top-[5.6rem] hidden h-[2.5px] origin-left rounded-full bg-gradient-to-r from-purple-600 via-fuchsia-500 via-rose-500 via-amber-400 to-orange-500 shadow-[0_0_12px_rgba(236,72,153,0.5)] md:block"
+            className="absolute left-0 right-0 top-[5.6rem] hidden h-[2.5px] origin-left rounded-full bg-gradient-to-r from-blue-600 via-sky-500 via-cyan-500 via-amber-400 to-amber-500 shadow-[0_0_12px_rgba(99,102,241,0.5)] md:block"
           />
           {/* mobile vertical line: scroll ke saath "bati" ki tarah jalti hai */}
           <div aria-hidden="true" className="absolute bottom-0 left-[1.05rem] top-4 w-[2px] bg-mist md:hidden" />
           <motion.div
             aria-hidden="true"
             style={{ scaleY: fill }}
-            className="absolute bottom-0 left-[calc(1.05rem-0.5px)] top-4 w-[2.5px] origin-top rounded-full bg-gradient-to-b from-purple-600 via-fuchsia-500 via-rose-500 to-amber-400 shadow-[0_0_10px_rgba(236,72,153,0.5)] md:hidden"
+            className="absolute bottom-0 left-[calc(1.05rem-0.5px)] top-4 w-[2.5px] origin-top rounded-full bg-gradient-to-b from-blue-600 via-sky-500 via-cyan-500 to-amber-400 shadow-[0_0_10px_rgba(99,102,241,0.5)] md:hidden"
           />
           {/* jalti hui chingari (line ka head) */}
           {!reduced && (

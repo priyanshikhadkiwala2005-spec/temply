@@ -62,7 +62,7 @@ export default function Hero() {
         <div className="relative mx-auto flex h-[400px] w-full max-w-[560px] items-center justify-center sm:h-[500px] lg:h-[600px]">
           <motion.div style={{ y: yBlob }} className="absolute inset-0" aria-hidden="true">
             <Blob className="left-[8%] top-[8%] h-[85%] w-[88%] opacity-90" duration={26} />
-            <Blob className="-right-2 bottom-2 h-24 w-24 opacity-60" from="#eeddf5" to="#b66bc8" duration={18} />
+            <Blob className="-right-2 bottom-2 h-24 w-24 opacity-60" from="#dbe9ff" to="#6aa8ff" duration={18} />
           </motion.div>
 
           <motion.div style={{ y: yDevices }} className="relative flex items-center justify-center [--ps:0.6] sm:[--ps:0.8] lg:[--ps:0.9]">

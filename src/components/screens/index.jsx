@@ -19,18 +19,18 @@ export function EditorScreen() {
   return (
     <div className={base}>
       <Bar title="Festival Editor" right="Save" />
-      <div className="relative mx-3 h-[236px] overflow-hidden rounded-xl bg-[radial-gradient(ellipse_at_50%_100%,rgba(245,158,11,0.5)_0%,transparent_60%),linear-gradient(135deg,#3b0764_0%,#701a75_35%,#c026d3_70%,#e11d48_100%)] shadow-xl">
+      <div className="relative mx-3 h-[236px] overflow-hidden rounded-xl bg-[radial-gradient(ellipse_at_50%_100%,rgba(245,158,11,0.5)_0%,transparent_60%),linear-gradient(135deg,#3b0764_0%,#701a75_35%,#0ea5e9_70%,#06b6d4_100%)] shadow-xl">
         {/* Festive Toran garland at the top (like SS 4) */}
         <div className="absolute inset-x-0 top-0 flex justify-center gap-1.5 px-3 pt-1">
           {[
             { bg: '#f59e0b', h: 'h-2 w-3.5' },
-            { bg: '#ec4899', h: 'h-2.5 w-3.5' },
-            { bg: '#f97316', h: 'h-2 w-3.5' },
-            { bg: '#a855f7', h: 'h-2.5 w-3.5' },
+            { bg: '#6366f1', h: 'h-2.5 w-3.5' },
+            { bg: '#f59e0b', h: 'h-2 w-3.5' },
+            { bg: '#60a5fa', h: 'h-2.5 w-3.5' },
             { bg: '#fbbf24', h: 'h-2 w-3.5' },
-            { bg: '#f43f5e', h: 'h-2.5 w-3.5' },
+            { bg: '#22d3ee', h: 'h-2.5 w-3.5' },
             { bg: '#38bdf8', h: 'h-2 w-3.5' },
-            { bg: '#ec4899', h: 'h-2.5 w-3.5' },
+            { bg: '#6366f1', h: 'h-2.5 w-3.5' },
             { bg: '#f59e0b', h: 'h-2 w-3.5' },
           ].map((t, i) => (
             <span
@@ -97,7 +97,7 @@ export function EditorScreen() {
             key={l}
             className={`rounded-lg py-2 transition-transform ${
               i === 1
-                ? 'bg-gradient-to-r from-brand via-fuchsia-600 to-rose-500 text-white shadow-sm'
+                ? 'bg-gradient-to-r from-brand via-sky-600 to-cyan-500 text-white shadow-sm'
                 : 'bg-mist text-plum'
             }`}
           >
@@ -109,17 +109,17 @@ export function EditorScreen() {
 
       {/* Colorful festive swatches (SS 4 style) */}
       <div className="mt-3 flex gap-2 px-3">
-        {['from-amber-400 to-orange-500', 'from-fuchsia-600 to-rose-500', 'from-purple-600 to-brand', 'from-rose-500 to-amber-500'].map((g, i) => (
+        {['from-amber-400 to-amber-500', 'from-sky-600 to-cyan-500', 'from-blue-600 to-brand', 'from-cyan-500 to-amber-500'].map((g, i) => (
           <div
             key={i}
-            className={`h-11 flex-1 rounded-lg bg-gradient-to-br ${g} shadow-xs ${i === 1 ? 'ring-2 ring-fuchsia-500 scale-105' : ''}`}
+            className={`h-11 flex-1 rounded-lg bg-gradient-to-br ${g} shadow-xs ${i === 1 ? 'ring-2 ring-sky-500 scale-105' : ''}`}
           />
         ))}
       </div>
 
       {/* Share action */}
       <div className="mx-3 mt-3 flex gap-2">
-        <div className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-gradient-to-r from-brand via-fuchsia-600 to-rose-500 py-2.5 text-[11px] font-semibold text-white shadow-md">
+        <div className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-gradient-to-r from-brand via-sky-600 to-cyan-500 py-2.5 text-[11px] font-semibold text-white shadow-md">
           <Share2 size={12} aria-hidden="true" /> Share
         </div>
         <div className="grid w-10 place-items-center rounded-lg bg-mist text-plum">
@@ -134,7 +134,7 @@ export function RewardsScreen() {
   return (
     <div className={base}>
       <Bar title="Rewards" right="Demo" />
-      <div className="relative mx-3 overflow-hidden rounded-2xl bg-[linear-gradient(135deg,#3b0764_0%,#701a75_35%,#c026d3_70%,#e11d48_100%)] p-4 text-white shadow-xl">
+      <div className="relative mx-3 overflow-hidden rounded-2xl bg-[linear-gradient(135deg,#3b0764_0%,#701a75_35%,#0ea5e9_70%,#06b6d4_100%)] p-4 text-white shadow-xl">
         <div className="absolute -right-6 -top-6 h-20 w-20 rounded-full bg-white/15 blur-sm" />
         <div className="absolute -bottom-6 -left-6 h-16 w-16 rounded-full bg-amber-400/20 blur-sm" />
         <Sparkles size={10} className="absolute right-4 top-3 text-amber-200" aria-hidden="true" />
@@ -158,7 +158,7 @@ export function RewardsScreen() {
               key={i}
               className={`grid h-6 flex-1 place-items-center rounded-md text-[9px] font-semibold ${
                 i < 4
-                  ? 'bg-gradient-to-br from-brand via-fuchsia-600 to-rose-500 text-white shadow-xs'
+                  ? 'bg-gradient-to-br from-brand via-sky-600 to-cyan-500 text-white shadow-xs'
                   : 'bg-mist text-muted'
               }`}
             >
@@ -173,17 +173,17 @@ export function RewardsScreen() {
           <span className="text-muted">2 / 5</span>
         </div>
         <div className="h-2 rounded-full bg-mist">
-          <div className="h-2 w-2/5 rounded-full bg-gradient-to-r from-brand via-fuchsia-600 to-rose-500" />
+          <div className="h-2 w-2/5 rounded-full bg-gradient-to-r from-brand via-sky-600 to-cyan-500" />
         </div>
       </div>
       <p className="mx-4 mb-1.5 mt-3 text-[10px] font-semibold uppercase tracking-wider text-muted">Sample offers</p>
       {[['Café voucher', '50 pts'], ['Store discount', '80 pts']].map(([n, p]) => (
         <div key={n} className="mx-3 mb-2 flex items-center gap-2 rounded-xl bg-white p-2 ring-1 ring-mist shadow-2xs">
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-rose-50 text-rose-500">
+          <span className="grid h-8 w-8 place-items-center rounded-lg bg-cyan-50 text-rose-500">
             <Gift size={14} aria-hidden="true" />
           </span>
           <span className="flex-1 font-semibold text-plum">{n}</span>
-          <span className="rounded-md bg-gradient-to-r from-brand via-fuchsia-600 to-rose-500 px-2 py-1 text-[9px] font-semibold text-white shadow-2xs">
+          <span className="rounded-md bg-gradient-to-r from-brand via-sky-600 to-cyan-500 px-2 py-1 text-[9px] font-semibold text-white shadow-2xs">
             {p}
           </span>
         </div>

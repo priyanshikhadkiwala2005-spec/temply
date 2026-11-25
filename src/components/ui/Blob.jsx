@@ -7,7 +7,7 @@ const shapes = [
 ]
 
 // Slowly morphing organic shape. Decorative only.
-export default function Blob({ className = '', from = '#b66bc8', to = '#843da0', gradient, duration = 22 }) {
+export default function Blob({ className = '', from = '#6aa8ff', to = '#1f5ae6', gradient, duration = 22 }) {
   return (
     <motion.div
       aria-hidden="true"

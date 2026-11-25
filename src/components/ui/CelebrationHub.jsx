@@ -10,7 +10,7 @@ const FESTIVALS = [
     badge: 'Grand Lights',
     title: 'Happy Diwali & Prosperity',
     subtitle: 'Wishing your family & business radiant growth, divine light and endless joy!',
-    bgGradient: 'from-[#42134e] via-[#5c1c69] to-[#882b6b]',
+    bgGradient: 'from-[#0a1f6b] via-[#1d4ed8] to-[#0ea5e9]',
     accent: '#f59e0b',
     glow: 'rgba(245, 158, 11, 0.45)',
     business: 'Sharma Sweets & Cafe',
@@ -23,9 +23,9 @@ const FESTIVALS = [
     badge: 'Color Blast',
     title: 'Vibrant Happy Holi',
     subtitle: 'Celebrate the splash of togetherness, sweet gujiyas and bright new beginnings!',
-    bgGradient: 'from-[#3e144a] via-[#751b68] to-[#b32468]',
-    accent: '#ec4899',
-    glow: 'rgba(236, 72, 153, 0.45)',
+    bgGradient: 'from-[#0b1f6e] via-[#2563eb] to-[#22d3ee]',
+    accent: '#6366f1',
+    glow: 'rgba(99,102,241, 0.45)',
     business: 'Sharma Sweets & Cafe',
     category: 'Gourmet Treats · Since 1998',
   },
@@ -36,7 +36,7 @@ const FESTIVALS = [
     badge: 'Divine Blessings',
     title: 'Eid Mubarak & Peace',
     subtitle: 'May this sacred celebration bring peace, abundant blessings and warmth to all.',
-    bgGradient: 'from-[#19273c] via-[#2f3d5c] to-[#4d2b5b]',
+    bgGradient: 'from-[#0b1b3c] via-[#1e3a8a] to-[#0e7490]',
     accent: '#38bdf8',
     glow: 'rgba(56, 189, 248, 0.45)',
     business: 'Sharma Sweets & Cafe',
@@ -49,7 +49,7 @@ const FESTIVALS = [
     badge: 'Fresh Start',
     title: 'Cheers to New Horizons',
     subtitle: 'Stepping into a glorious year of big milestones, happy customers and success.',
-    bgGradient: 'from-[#3b1548] via-[#5f1b5e] to-[#7c2656]',
+    bgGradient: 'from-[#0a1f6b] via-[#1f5ae6] to-[#f59e0b]',
     accent: '#fcd34d',
     glow: 'rgba(252, 211, 77, 0.45)',
     business: 'Sharma Sweets & Cafe',
@@ -127,9 +127,9 @@ function FestivalVisual({ type }) {
           transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
           className="relative h-20 w-20"
         >
-          <div className="absolute -left-2 -top-2 h-10 w-10 rounded-full bg-pink-500/60 blur-md" />
+          <div className="absolute -left-2 -top-2 h-10 w-10 rounded-full bg-indigo-500/60 blur-md" />
           <div className="absolute -right-2 -top-1 h-11 w-11 rounded-full bg-amber-400/60 blur-md" />
-          <div className="absolute -bottom-2 left-1 h-12 w-12 rounded-full bg-purple-500/60 blur-md" />
+          <div className="absolute -bottom-2 left-1 h-12 w-12 rounded-full bg-blue-500/60 blur-md" />
           <div className="absolute bottom-0 right-0 h-9 w-9 rounded-full bg-cyan-400/50 blur-md" />
         </motion.div>
 
@@ -239,7 +239,7 @@ export default function CelebrationHub() {
       <motion.div
         className="pointer-events-none absolute -inset-6 -z-10 rounded-full blur-3xl opacity-60 transition-colors duration-1000"
         style={{
-          background: `radial-gradient(circle, ${current.glow} 0%, rgba(84,36,95,0.12) 65%, transparent 80%)`,
+          background: `radial-gradient(circle, ${current.glow} 0%, rgba(10,42,143,0.12) 65%, transparent 80%)`,
         }}
         animate={{ scale: [0.95, 1.05, 0.95] }}
         transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
@@ -251,9 +251,9 @@ export default function CelebrationHub() {
         className="pointer-events-none absolute -inset-8 -z-10 h-[calc(100%+4rem)] w-[calc(100%+4rem)] animate-[spin_120s_linear_infinite]"
         aria-hidden="true"
       >
-        <circle cx="230" cy="230" r="215" fill="none" stroke="#b66bc8" strokeWidth="1" strokeDasharray="4 8" opacity="0.35" />
-        <circle cx="230" cy="230" r="170" fill="none" stroke="#eeddf5" strokeWidth="1" strokeDasharray="3 6" opacity="0.6" />
-        <circle cx="230" cy="230" r="125" fill="none" stroke="#843da0" strokeWidth="0.8" strokeDasharray="8 12" opacity="0.4" />
+        <circle cx="230" cy="230" r="215" fill="none" stroke="#6aa8ff" strokeWidth="1" strokeDasharray="4 8" opacity="0.35" />
+        <circle cx="230" cy="230" r="170" fill="none" stroke="#dbe9ff" strokeWidth="1" strokeDasharray="3 6" opacity="0.6" />
+        <circle cx="230" cy="230" r="125" fill="none" stroke="#1f5ae6" strokeWidth="0.8" strokeDasharray="8 12" opacity="0.4" />
         {/* Accent Star/Orbit Points */}
         {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => {
           const rad = (deg * Math.PI) / 180
@@ -265,7 +265,7 @@ export default function CelebrationHub() {
               cx={x}
               cy={y}
               r={deg % 90 === 0 ? '4' : '2.5'}
-              fill={deg % 90 === 0 ? '#f59e0b' : '#b66bc8'}
+              fill={deg % 90 === 0 ? '#f59e0b' : '#6aa8ff'}
               opacity="0.8"
             />
           )
@@ -298,7 +298,7 @@ export default function CelebrationHub() {
       {/* CENTRAL SHOWCASE CARD */}
       <div className="relative z-10 w-full max-w-[340px] sm:max-w-[365px]">
         {/* Interactive Festival Selector Tabs */}
-        <div className="mb-3 flex items-center justify-center gap-1.5 rounded-2xl bg-white/80 p-1.5 shadow-[0_10px_25px_-8px_rgba(84,36,95,0.18)] backdrop-blur-md border border-white">
+        <div className="mb-3 flex items-center justify-center gap-1.5 rounded-2xl bg-white/80 p-1.5 shadow-[0_10px_25px_-8px_rgba(10,42,143,0.18)] backdrop-blur-md border border-white">
           {FESTIVALS.map((fest, idx) => {
             const isActive = idx === activeIdx
             return (
@@ -314,7 +314,7 @@ export default function CelebrationHub() {
                 {isActive && (
                   <motion.div
                     layoutId="activeFestivalPill"
-                    className="absolute inset-0 rounded-xl bg-gradient-to-r from-mist to-white shadow-[0_2px_8px_rgba(132,61,160,0.18)]"
+                    className="absolute inset-0 rounded-xl bg-gradient-to-r from-mist to-white shadow-[0_2px_8px_rgba(31,90,230,0.18)]"
                     transition={{ type: 'spring', stiffness: 380, damping: 28 }}
                   />
                 )}
@@ -327,7 +327,7 @@ export default function CelebrationHub() {
 
         {/* Masterpiece Festive Canvas Card */}
         <motion.div
-          className="relative overflow-hidden rounded-[2rem] border border-white/80 bg-white p-2.5 shadow-[0_25px_60px_-15px_rgba(84,36,95,0.45)]"
+          className="relative overflow-hidden rounded-[2rem] border border-white/80 bg-white p-2.5 shadow-[0_25px_60px_-15px_rgba(10,42,143,0.45)]"
           whileHover={{ y: -3, transition: { duration: 0.3 } }}
         >
           <AnimatePresence mode="wait">
@@ -410,7 +410,7 @@ export default function CelebrationHub() {
         transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut' }}
         className="absolute -top-3 -left-3 max-sm:top-0 max-sm:left-1 sm:-left-10 z-20"
       >
-        <div className="group flex items-center gap-2.5 rounded-2xl border border-white/90 bg-white/95 px-3.5 py-2.5 max-sm:gap-2 max-sm:px-2.5 max-sm:py-2 shadow-[0_16px_35px_-10px_rgba(84,36,95,0.35)] backdrop-blur-md transition-all hover:scale-105 hover:shadow-[0_20px_40px_-10px_rgba(132,61,160,0.45)]">
+        <div className="group flex items-center gap-2.5 rounded-2xl border border-white/90 bg-white/95 px-3.5 py-2.5 max-sm:gap-2 max-sm:px-2.5 max-sm:py-2 shadow-[0_16px_35px_-10px_rgba(10,42,143,0.35)] backdrop-blur-md transition-all hover:scale-105 hover:shadow-[0_20px_40px_-10px_rgba(31,90,230,0.45)]">
           <div className="grid h-8 w-8 place-items-center rounded-xl bg-gradient-to-br from-plum to-brand text-white shadow-sm">
             <Palette size={16} aria-hidden="true" />
           </div>
@@ -430,7 +430,7 @@ export default function CelebrationHub() {
         transition={{ duration: 5.6, repeat: Infinity, ease: 'easeInOut' }}
         className="absolute top-[48%] -right-3 max-sm:top-0 max-sm:right-1 sm:-right-10 z-20"
       >
-        <div className="group flex items-center gap-2.5 rounded-2xl border border-white/90 bg-white/95 px-3.5 py-2.5 max-sm:gap-2 max-sm:px-2.5 max-sm:py-2 shadow-[0_16px_35px_-10px_rgba(84,36,95,0.35)] backdrop-blur-md transition-all hover:scale-105 hover:shadow-[0_20px_40px_-10px_rgba(132,61,160,0.45)]">
+        <div className="group flex items-center gap-2.5 rounded-2xl border border-white/90 bg-white/95 px-3.5 py-2.5 max-sm:gap-2 max-sm:px-2.5 max-sm:py-2 shadow-[0_16px_35px_-10px_rgba(10,42,143,0.35)] backdrop-blur-md transition-all hover:scale-105 hover:shadow-[0_20px_40px_-10px_rgba(31,90,230,0.45)]">
           <div className="grid h-8 w-8 place-items-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-sm">
             <Share2 size={16} aria-hidden="true" />
           </div>
@@ -450,7 +450,7 @@ export default function CelebrationHub() {
         transition={{ duration: 5.2, repeat: Infinity, ease: 'easeInOut' }}
         className="absolute -bottom-4 -left-3 max-sm:bottom-2 max-sm:left-1/2 max-sm:-translate-x-1/2 sm:-left-8 z-20"
       >
-        <div className="group flex items-center gap-2.5 rounded-2xl border border-white/90 bg-white/95 px-3.5 py-2.5 max-sm:gap-2 max-sm:px-2.5 max-sm:py-2 shadow-[0_16px_35px_-10px_rgba(84,36,95,0.35)] backdrop-blur-md transition-all hover:scale-105 hover:shadow-[0_20px_40px_-10px_rgba(132,61,160,0.45)]">
+        <div className="group flex items-center gap-2.5 rounded-2xl border border-white/90 bg-white/95 px-3.5 py-2.5 max-sm:gap-2 max-sm:px-2.5 max-sm:py-2 shadow-[0_16px_35px_-10px_rgba(10,42,143,0.35)] backdrop-blur-md transition-all hover:scale-105 hover:shadow-[0_20px_40px_-10px_rgba(31,90,230,0.45)]">
           <div className="grid h-8 w-8 place-items-center rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 text-white shadow-sm">
             <Coins size={16} aria-hidden="true" />
           </div>

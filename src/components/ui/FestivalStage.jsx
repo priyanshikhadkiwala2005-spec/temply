@@ -15,13 +15,13 @@ import { ArrowLeft, ArrowRight, Sparkles } from 'lucide-react'
 
 const FESTIVALS = [
   { id: 'diwali', name: 'Happy Diwali', chip: 'Diwali', tag: 'Festival of Lights', src: '/poster/Diwali-reel.webp', glow: '#f59e0b', biz: 'Sharma Sweets', initial: 'S' },
-  { id: 'navratri', name: 'Happy Navratri', chip: 'Navratri', tag: 'Nine Sacred Nights', src: '/poster/Navratri-reel.webp', glow: '#c2410c', biz: 'Kalyan Gems', initial: 'K' },
-  { id: 'rakhi', name: 'Happy Raksha Bandhan', chip: 'Raksha Bandhan', tag: 'Thread of Love', src: '/poster/Raksha-Bandhan-reel.webp', glow: '#db2777', biz: 'Anand Gifts', initial: 'A' },
+  { id: 'navratri', name: 'Happy Navratri', chip: 'Navratri', tag: 'Nine Sacred Nights', src: '/poster/Navratri-reel.webp', glow: '#b45309', biz: 'Kalyan Gems', initial: 'K' },
+  { id: 'rakhi', name: 'Happy Raksha Bandhan', chip: 'Raksha Bandhan', tag: 'Thread of Love', src: '/poster/Raksha-Bandhan-reel.webp', glow: '#4f46e5', biz: 'Anand Gifts', initial: 'A' },
   { id: 'christmas', name: 'Merry Christmas', chip: 'Christmas', tag: 'Season of Joy', src: '/poster/Christmas.webp', glow: '#65a30d', biz: 'Starlight Café', initial: 'S' },
-  { id: 'onam', name: 'Happy Onam', chip: 'Onam', tag: 'Harvest of Kerala', src: '/poster/Onam.webp', glow: '#f472b6', biz: 'Kerala Mart', initial: 'K' },
+  { id: 'onam', name: 'Happy Onam', chip: 'Onam', tag: 'Harvest of Kerala', src: '/poster/Onam.webp', glow: '#818cf8', biz: 'Kerala Mart', initial: 'K' },
   { id: 'pongal', name: 'Happy Pongal', chip: 'Pongal', tag: 'Harvest Thanksgiving', src: '/poster/Pongal.webp', glow: '#fbbf24', biz: 'Murugan Silk', initial: 'M' },
-  { id: 'holi', name: 'Happy Holi', chip: 'Holi', tag: 'Festival of Colours', src: '/poster/Holi.webp', glow: '#a855f7', biz: 'Apex Studio', initial: 'A' },
-  { id: 'eid', name: 'Eid Mubarak', chip: 'Eid', tag: 'Blessings & Prosperity', src: '/poster/Eid-reel.webp', glow: '#ea580c', biz: 'Al-Madina', initial: 'M' },
+  { id: 'holi', name: 'Happy Holi', chip: 'Holi', tag: 'Festival of Colours', src: '/poster/Holi.webp', glow: '#60a5fa', biz: 'Apex Studio', initial: 'A' },
+  { id: 'eid', name: 'Eid Mubarak', chip: 'Eid', tag: 'Blessings & Prosperity', src: '/poster/Eid-reel.webp', glow: '#d97706', biz: 'Al-Madina', initial: 'M' },
 ]
 
 const N = FESTIVALS.length
@@ -60,7 +60,7 @@ function Poster({ item, slot, dir, dragX, onTap }) {
         animate={pose}
         transition={{ type: 'spring', stiffness: 190, damping: 22, mass: 0.9 }}
         style={{ pointerEvents: slot < 3 ? 'auto' : 'none' }}
-        className="relative block h-full w-full overflow-hidden rounded-[1.6rem] bg-white p-1.5 text-left shadow-[0_30px_60px_-22px_rgba(40,10,50,0.6)] ring-1 ring-black/5 sm:rounded-[2rem] sm:p-2"
+        className="relative block h-full w-full overflow-hidden rounded-[1.6rem] bg-white p-1.5 text-left shadow-[0_30px_60px_-22px_rgba(6,21,74,0.6)] ring-1 ring-black/5 sm:rounded-[2rem] sm:p-2"
       >
         <img
           src={item.src}

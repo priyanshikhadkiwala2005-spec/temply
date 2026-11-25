@@ -16,7 +16,7 @@ import { useIsMobile } from './useIsMobile'
 /*  Desktop par ye component kuch bhi nahi karta.                     */
 /* ------------------------------------------------------------------ */
 
-const FEST = ['#f59e0b', '#fbbf24', '#fb923c', '#b66bc8', '#843da0', '#ffffff', '#e8618c']
+const FEST = ['#f59e0b', '#fbbf24', '#fbbf24', '#6aa8ff', '#1f5ae6', '#ffffff', '#22d3ee']
 const STACK_TOP = 18
 const STACK_STEP = 16
 
