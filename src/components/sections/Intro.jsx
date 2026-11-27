@@ -4,12 +4,15 @@ import { ArrowRight } from 'lucide-react'
 import CelebrationHub from '../ui/CelebrationHub'
 import Eyebrow from '../ui/Eyebrow'
 import { Reveal } from '../ui/Reveal'
+import { useIsMobile } from '../../mobile/useIsMobile'
 
 export default function Intro() {
   const ref = useRef(null)
   const reduced = useReducedMotion()
+  const mobile = useIsMobile()
+  const still = reduced || mobile // parallax band
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
-  const y = useTransform(scrollYProgress, [0, 1], [reduced ? 0 : 40, reduced ? 0 : -40])
+  const y = useTransform(scrollYProgress, [0, 1], [still ? 0 : 40, still ? 0 : -40])
 
   return (
     <section id="platform" ref={ref} className="relative overflow-hidden bg-white py-24 lg:py-32">

@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+import { useState, useEffect, useRef } from 'react'
+import { motion, AnimatePresence, useInView, useReducedMotion } from 'framer-motion'
 import { Sparkles, Palette, Share2, Coins, CheckCircle2, Wand2 } from 'lucide-react'
+import { useLoop } from '../../mobile/useIsMobile'
 
 const FESTIVALS = [
   {
@@ -58,6 +59,8 @@ const FESTIVALS = [
 ]
 
 function FestivalVisual({ type }) {
+  const loop = useLoop()
+
   if (type === 'diwali') {
     return (
       <div className="relative flex h-24 w-full items-center justify-center">
@@ -75,10 +78,10 @@ function FestivalVisual({ type }) {
           <motion.path
             d="M60 8 C68 20 68 26 60 32 C52 26 52 20 60 8 Z"
             fill="url(#diwali-flame)"
-            animate={{
+            animate={loop({
               scaleY: [1, 1.18, 0.94, 1.12, 1],
               scaleX: [1, 0.9, 1.08, 0.94, 1],
-            }}
+            })}
             transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
             style={{ transformBox: 'fill-box', transformOrigin: 'center bottom' }}
           />
@@ -102,13 +105,13 @@ function FestivalVisual({ type }) {
         ].map((pt, i) => (
           <motion.div
             key={i}
-            className="pointer-events-none absolute text-amber-300"
+            className="pointer-events-none absolute text-amber-300 max-md:hidden"
             style={{ left: `calc(50% + ${pt.x}px)`, top: `calc(50% + ${pt.y}px)` }}
-            animate={{
+            animate={loop({
               scale: [0.6, 1.3, 0.6],
               opacity: [0.3, 1, 0.3],
               rotate: [0, 45, 0],
-            }}
+            })}
             transition={{ duration: 2.2, delay: pt.d, repeat: Infinity, ease: 'easeInOut' }}
           >
             <Sparkles size={pt.s} />
@@ -123,7 +126,7 @@ function FestivalVisual({ type }) {
       <div className="relative flex h-24 w-full items-center justify-center">
         {/* Gulal powder splashes */}
         <motion.div
-          animate={{ rotate: 360 }}
+          animate={loop({ rotate: 360 })}
           transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
           className="relative h-20 w-20"
         >
@@ -135,14 +138,14 @@ function FestivalVisual({ type }) {
 
         <div className="absolute flex items-center justify-center gap-2">
           <motion.div
-            animate={{ scale: [1, 1.15, 1], rotate: [-8, 8, -8] }}
+            animate={loop({ scale: [1, 1.15, 1], rotate: [-8, 8, -8] })}
             transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
             className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-md border border-white/40 shadow-lg text-2xl"
           >
             🎨
           </motion.div>
           <motion.div
-            animate={{ scale: [1, 1.12, 1], y: [0, -4, 0] }}
+            animate={loop({ scale: [1, 1.12, 1], y: [0, -4, 0] })}
             transition={{ duration: 2.4, delay: 0.3, repeat: Infinity, ease: 'easeInOut' }}
             className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-400/30 backdrop-blur-md border border-amber-300/50 text-lg"
           >
@@ -172,7 +175,7 @@ function FestivalVisual({ type }) {
           <motion.polygon
             points="58,22 60,26 64,27 61,30 62,34 58,32 54,34 55,30 52,27 56,26"
             fill="#ffffff"
-            animate={{ scale: [0.8, 1.25, 0.8], opacity: [0.6, 1, 0.6] }}
+            animate={loop({ scale: [0.8, 1.25, 0.8], opacity: [0.6, 1, 0.6] })}
             transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
             style={{ transformBox: 'fill-box', transformOrigin: 'center' }}
           />
@@ -185,7 +188,7 @@ function FestivalVisual({ type }) {
     <div className="relative flex h-24 w-full items-center justify-center">
       <div className="absolute h-20 w-20 rounded-full bg-amber-300/25 blur-xl" />
       <motion.div
-        animate={{ rotate: 360 }}
+        animate={loop({ rotate: 360 })}
         transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
         className="relative flex items-center justify-center"
       >
@@ -216,19 +219,23 @@ export default function CelebrationHub() {
   const [activeIdx, setActiveIdx] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
   const reduced = useReducedMotion()
+  const loop = useLoop()
+  const rootRef = useRef(null)
+  const inView = useInView(rootRef)
 
   const current = FESTIVALS[activeIdx]
 
   useEffect(() => {
-    if (reduced || isPaused) return
+    if (reduced || isPaused || !inView) return
     const timer = setInterval(() => {
       setActiveIdx((prev) => (prev + 1) % FESTIVALS.length)
     }, 4200)
     return () => clearInterval(timer)
-  }, [reduced, isPaused])
+  }, [reduced, isPaused, inView])
 
   return (
     <div
+      ref={rootRef}
       className="relative mx-auto flex w-full max-w-[540px] items-center justify-center py-6 px-2 select-none max-sm:pt-16 max-sm:pb-20"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
@@ -241,14 +248,14 @@ export default function CelebrationHub() {
         style={{
           background: `radial-gradient(circle, ${current.glow} 0%, rgba(10,42,143,0.12) 65%, transparent 80%)`,
         }}
-        animate={{ scale: [0.95, 1.05, 0.95] }}
+        animate={loop({ scale: [0.95, 1.05, 0.95] })}
         transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
       />
 
       {/* Modern Sacred Geometry & Orbital Rings */}
       <svg
         viewBox="0 0 460 460"
-        className="pointer-events-none absolute -inset-8 -z-10 h-[calc(100%+4rem)] w-[calc(100%+4rem)] animate-[spin_120s_linear_infinite]"
+        className="pointer-events-none absolute -inset-8 -z-10 h-[calc(100%+4rem)] w-[calc(100%+4rem)] md:animate-[spin_120s_linear_infinite]"
         aria-hidden="true"
       >
         <circle cx="230" cy="230" r="215" fill="none" stroke="#6aa8ff" strokeWidth="1" strokeDasharray="4 8" opacity="0.35" />
@@ -282,13 +289,13 @@ export default function CelebrationHub() {
         <motion.span
           key={i}
           aria-hidden="true"
-          className="pointer-events-none absolute text-amber-300"
+          className="pointer-events-none absolute text-amber-300 max-md:hidden"
           style={{ top: pt.top, left: pt.left, right: pt.right }}
-          animate={{
+          animate={loop({
             y: [0, -18, 0],
             opacity: [0.2, 0.9, 0.2],
             scale: [0.8, 1.2, 0.8],
-          }}
+          })}
           transition={{ duration: 3.5, delay: pt.d, repeat: Infinity, ease: 'easeInOut' }}
         >
           <Sparkles size={pt.s} />
@@ -406,7 +413,7 @@ export default function CelebrationHub() {
 
       {/* 1. CREATE POD (Top-Left) */}
       <motion.div
-        animate={{ y: [0, -7, 0] }}
+        animate={loop({ y: [0, -7, 0] })}
         transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut' }}
         className="absolute -top-3 -left-3 max-sm:top-0 max-sm:left-1 sm:-left-10 z-20"
       >
@@ -426,7 +433,7 @@ export default function CelebrationHub() {
 
       {/* 2. SHARE POD (Middle-Right) */}
       <motion.div
-        animate={{ y: [0, 8, 0] }}
+        animate={loop({ y: [0, 8, 0] })}
         transition={{ duration: 5.6, repeat: Infinity, ease: 'easeInOut' }}
         className="absolute top-[48%] -right-3 max-sm:top-0 max-sm:right-1 sm:-right-10 z-20"
       >
@@ -446,7 +453,7 @@ export default function CelebrationHub() {
 
       {/* 3. EARN REWARDS POD (Bottom-Left) */}
       <motion.div
-        animate={{ y: [0, -6, 0] }}
+        animate={loop({ y: [0, -6, 0] })}
         transition={{ duration: 5.2, repeat: Infinity, ease: 'easeInOut' }}
         className="absolute -bottom-4 -left-3 max-sm:bottom-2 max-sm:left-1/2 max-sm:-translate-x-1/2 sm:-left-8 z-20"
       >

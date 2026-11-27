@@ -3,6 +3,7 @@ import { Crown, Coins, Users, ArrowRight } from 'lucide-react'
 import Eyebrow from '../ui/Eyebrow'
 import Blob from '../ui/Blob'
 import { Reveal } from '../ui/Reveal'
+import { useLoop } from '../../mobile/useIsMobile'
 
 const FLOW = [
   { Icon: Crown, t: 'Membership', d: 'unlocks the creative and business tools' },
@@ -36,6 +37,8 @@ function Ring({ value = 0.4 }) {
 }
 
 export default function Spotlight() {
+  const loop = useLoop()
+
   return (
     <section id="spotlight" className="relative overflow-hidden bg-gradient-to-b from-pale to-mist py-24 lg:py-32">
       <div className="mx-auto grid max-w-7xl items-center gap-16 px-5 md:px-8 lg:grid-cols-[1.1fr_0.9fr]">
@@ -50,10 +53,10 @@ export default function Spotlight() {
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             className="absolute left-0 top-4 w-[78%] sm:w-[72%]"
           >
-            <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+            <motion.div animate={loop({ y: [0, -8, 0] })} transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
               className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-plum via-grape to-brand p-6 text-white shadow-[0_40px_70px_-30px_rgba(10,42,143,0.8)] sm:p-7">
               <div aria-hidden="true" className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-lav/30" />
-              <Crown className="festive-color-cycle drop-shadow-[0_0_8px_rgba(251,191,36,0.6)]" size={26} aria-hidden="true" />
+              <Crown className="festive-color-cycle max-md:text-amber-300! drop-shadow-[0_0_8px_rgba(251,191,36,0.6)]" size={26} aria-hidden="true" />
               <p className="festive-animated-text mt-10 inline-block pb-1 pr-2 font-serif text-2xl font-semibold sm:text-3xl">
                 Business Membership
               </p>
@@ -72,7 +75,7 @@ export default function Spotlight() {
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
             className="absolute bottom-0 right-0 w-[68%] sm:w-[58%]"
           >
-            <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+            <motion.div animate={loop({ y: [0, 10, 0] })} transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
               className="rounded-2xl border border-white bg-white/90 p-5 shadow-[0_30px_60px_-25px_rgba(10,42,143,0.55)]">
               <p className="festive-animated-text inline-block text-xs font-bold uppercase tracking-wider">
                 Rewards dashboard
@@ -100,7 +103,7 @@ export default function Spotlight() {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="absolute bottom-[38%] left-[2%] z-10 max-sm:bottom-auto max-sm:top-[262px] sm:bottom-[36%] sm:left-[6%]"
           >
-            <motion.div animate={{ y: [0, -9, 0] }} transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+            <motion.div animate={loop({ y: [0, -9, 0] })} transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
               className="flex items-center gap-3 rounded-2xl bg-white p-3 pr-5 shadow-[0_25px_50px_-20px_rgba(10,42,143,0.6)]">
               <div className="scale-75 sm:scale-90" style={{ margin: '-10px' }}><Ring value={0.4} /></div>
               <div>

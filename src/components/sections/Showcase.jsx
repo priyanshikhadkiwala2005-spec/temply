@@ -6,13 +6,14 @@ import Phone from '../ui/Phone'
 import Blob from '../ui/Blob'
 import { Reveal } from '../ui/Reveal'
 import { TABS } from '../../data/showcase'
-import { useIsMobile } from '../../mobile/useIsMobile'
+import { useLoop, useIsMobile } from '../../mobile/useIsMobile'
 
 export default function Showcase({ active, setActive }) {
   const refs = useRef({})
   const current = TABS.find((t) => t.id === active) ?? TABS[0]
   const { Screen } = current
   const mobile = useIsMobile()
+  const loop = useLoop()
 
   // Mobile only: phone ko left/right swipe karke tabs badlo (card swipe feel)
   const swipeTo = (dir) => {
@@ -184,7 +185,7 @@ export default function Showcase({ active, setActive }) {
                   {current.chips.map(([k, v], i) => (
                     <motion.div
                       key={k}
-                      animate={{ y: [0, i ? 8 : -8, 0] }}
+                      animate={loop({ y: [0, i ? 8 : -8, 0] })}
                       transition={{ duration: 6 + i, repeat: Infinity, ease: 'easeInOut' }}
                       className={`absolute z-10 hidden sm:block ${
                         i ? 'bottom-14 left-full ml-8 sm:ml-10' : 'right-full top-20 mr-8 sm:mr-10'

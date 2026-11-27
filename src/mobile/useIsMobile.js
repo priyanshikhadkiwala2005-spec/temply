@@ -20,3 +20,10 @@ export function useIsMobile() {
     () => false,
   )
 }
+
+/* Hamesha chalne wali (infinite) decorative animations phone par band:  */
+/* ye har frame CPU leti hain aur scroll ko atkati hain.                */
+export function useLoop() {
+  const mobile = useIsMobile()
+  return (keyframes) => (mobile ? undefined : keyframes)
+}

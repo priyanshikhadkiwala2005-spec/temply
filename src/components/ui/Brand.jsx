@@ -2,7 +2,7 @@ export default function Brand({ light = false }) {
   return (
     <span className="flex items-center gap-2.5">
       <img
-        src="/glovion-g.png"
+        src="/glovion-g-sm.png"
         alt=""
         width="44"
         height="44"

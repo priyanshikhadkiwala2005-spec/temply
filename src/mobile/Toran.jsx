@@ -1,7 +1,7 @@
 /* ------------------------------------------------------------------ */
 /*  TORAN: genda phool + aam ke patton ki latkan (mobile only)        */
 /*  Har card ke top par latakti hai. Card aate hi "khulti" hai        */
-/*  (.deck-lit) aur scroll speed ke hisaab se jhoolti hai (--sw).     */
+/*  (.deck-lit) aur scroll speed ke hisaab se jhoolti hai.     */
 /* ------------------------------------------------------------------ */
 
 const TONES = {
@@ -81,11 +81,10 @@ export default function Toran({ tone = 'marigold' }) {
           className="toran-strand"
           style={{
             left: `${i * seg}%`,
-            '--k': (i % 2 ? 1 : -0.8) * (0.7 + ((i * 37) % 10) / 20),
             '--d': `${Math.abs(i - N / 2) * 55}ms`,
           }}
         >
-          <span className="toran-sway" style={{ animationDelay: `${-i * 0.37}s` }}>
+          <span className="toran-sway">
             <Strand i={i} t={t} />
           </span>
         </span>

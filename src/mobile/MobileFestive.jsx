@@ -112,7 +112,10 @@ export default function MobileFestive() {
           lastHidden[i] = hide
           c.style.visibility = hide ? 'hidden' : ''
         }
-        if (visible && swChanged && torans[i]) torans[i].style.setProperty('--sw', sw.toFixed(1))
+        // poori toran par ek hi skew: andar ke phool dobara paint nahi hote
+        if (visible && !hide && swChanged && torans[i]) {
+          torans[i].style.transform = `skewX(${(-sw * 0.45).toFixed(2)}deg)`
+        }
 
         // card arrival: toran opens (sirf ek baar)
         if (i > 0 && !lit.has(i) && top < vh * 0.55) {
@@ -218,7 +221,7 @@ export default function MobileFestive() {
         c.classList.remove('deck-lit')
         for (const p of ['top', 'visibility']) c.style.removeProperty(p)
         shades[i]?.style.removeProperty('opacity')
-        torans[i]?.style.removeProperty('--sw')
+        torans[i]?.style.removeProperty('transform')
       })
       stacks.flat().forEach((el) => {
         for (const p of ['top', 'scale']) el.style.removeProperty(p)

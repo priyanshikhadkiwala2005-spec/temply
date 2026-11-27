@@ -5,7 +5,7 @@ export default function Eyebrow({ children, light = false, className = '' }) {
         light ? 'text-mist' : 'text-brand'
       } ${className}`}
     >
-      <span className={`h-px w-8 ${light ? 'bg-lav' : 'bg-brand'}`} aria-hidden="true" />
+      <span className={`h-px w-8 max-md:hidden ${light ? 'bg-lav' : 'bg-brand'}`} aria-hidden="true" />
       {children}
     </p>
   )

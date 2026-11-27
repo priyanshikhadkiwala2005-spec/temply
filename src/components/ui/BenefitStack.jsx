@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { animate, motion, useInView, useReducedMotion } from 'framer-motion'
 import { Sparkles, BadgeCheck, Coins } from 'lucide-react'
+import { useLoop } from '../../mobile/useIsMobile'
 
 const WORDS = ['Happy Diwali', 'Happy Holi', 'Eid Mubarak', 'Merry Christmas']
 
@@ -9,18 +10,21 @@ function Typewriter() {
   const [w, setW] = useState(0)
   const [n, setN] = useState(reduced ? WORDS[0].length : 0)
 
+  const ref = useRef(null)
+  const inView = useInView(ref)
+
   useEffect(() => {
-    if (reduced) return
+    if (reduced || !inView) return
     const word = WORDS[w]
     const t = setTimeout(
       () => (n < word.length ? setN(n + 1) : (setW((w + 1) % WORDS.length), setN(0))),
       n < word.length ? 110 : 1400,
     )
     return () => clearTimeout(t)
-  }, [n, w, reduced])
+  }, [n, w, reduced, inView])
 
   return (
-    <div className="flex h-16 w-24 shrink-0 items-center rounded-xl bg-gradient-to-br from-plum via-brand to-lav p-2 shadow-inner">
+    <div ref={ref} className="flex h-16 w-24 shrink-0 items-center rounded-xl bg-gradient-to-br from-plum via-brand to-lav p-2 shadow-inner">
       <p className="font-serif text-[13px] font-bold leading-tight">
         <span className="festive-bright-text inline-block">
           {WORDS[w].slice(0, n)}
@@ -32,6 +36,8 @@ function Typewriter() {
 }
 
 function Shimmer() {
+  const loop = useLoop()
+
   return (
     <div className="relative h-16 w-24 shrink-0 overflow-hidden rounded-xl bg-gradient-to-br from-plum to-brand p-2.5 shadow-inner">
       <BadgeCheck size={14} className="festive-bright-cycle" aria-hidden="true" />
@@ -41,7 +47,7 @@ function Shimmer() {
       <motion.span
         aria-hidden="true"
         className="absolute inset-y-0 -left-10 w-8 -skew-x-12 bg-white/30"
-        animate={{ x: [0, 160] }}
+        animate={loop({ x: [0, 160] })}
         transition={{ duration: 2.2, repeat: Infinity, repeatDelay: 1.6, ease: 'easeInOut' }}
       />
     </div>
@@ -81,12 +87,14 @@ const CARDS = [
 ]
 
 export default function BenefitStack() {
+  const loop = useLoop()
+
   return (
     <div className="relative mx-auto w-full max-w-[440px] py-4" role="img" aria-label="Preview of festive posts, membership, and rewards features">
       <motion.div
         aria-hidden="true"
         className="absolute -inset-4 -z-0 rounded-[2.5rem] bg-gradient-to-br from-mist via-lav/30 to-mist"
-        animate={{ rotate: [-2, 2, -2] }}
+        animate={loop({ rotate: [-2, 2, -2] })}
         transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
       />
       <div className="relative space-y-4 p-2">
@@ -100,7 +108,7 @@ export default function BenefitStack() {
             className={i % 2 ? 'ml-6 sm:ml-12' : 'mr-6 sm:mr-12'}
           >
             <motion.div
-              animate={{ y: [0, i % 2 ? 6 : -6, 0] }}
+              animate={loop({ y: [0, i % 2 ? 6 : -6, 0] })}
               transition={{ duration: 5 + i, repeat: Infinity, ease: 'easeInOut' }}
               className="flex items-center gap-4 rounded-2xl border border-white bg-white p-3 pr-4 shadow-[0_25px_45px_-22px_rgba(10,42,143,0.55)]"
             >

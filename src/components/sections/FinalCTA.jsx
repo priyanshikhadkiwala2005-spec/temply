@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { motion, useMotionValue, useSpring, useReducedMotion } from 'framer-motion'
+import { motion, useMotionValue, useSpring, useInView, useReducedMotion } from 'framer-motion'
 import confetti from 'canvas-confetti'
 import {
   ArrowRight,
@@ -7,6 +7,7 @@ import {
   Check,
 } from 'lucide-react'
 import { Reveal } from '../ui/Reveal'
+import { useIsMobile } from '../../mobile/useIsMobile'
 
 const celebrate = () => {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
@@ -60,6 +61,8 @@ function PosterFace({ p, priority }) {
 function FestivalPosterDeck() {
   const reduced = useReducedMotion()
   const ref = useRef(null)
+  const mobile = useIsMobile()
+  const inView = useInView(ref)
   const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
   const n = POSTERS.length
@@ -87,10 +90,10 @@ function FestivalPosterDeck() {
 
   // Automatic rotation: next poster every 3.2s, pauses while hovering
   useEffect(() => {
-    if (reduced || paused) return
+    if (reduced || paused || !inView) return
     const id = setInterval(() => setActive((a) => (a + 1) % n), 3200)
     return () => clearInterval(id)
-  }, [reduced, paused, n])
+  }, [reduced, paused, inView, n])
 
   return (
     <div
@@ -158,9 +161,9 @@ function FestivalPosterDeck() {
             >
               <motion.div
                 className="relative h-full w-full overflow-hidden rounded-[20px]"
-                animate={isActive && !reduced ? { y: [0, -7, 0] } : { y: 0 }}
+                animate={isActive && !reduced && !mobile ? { y: [0, -7, 0] } : { y: 0 }}
                 transition={
-                  isActive && !reduced
+                  isActive && !reduced && !mobile
                     ? { duration: 4.2, repeat: Infinity, ease: 'easeInOut' }
                     : { duration: 0.4 }
                 }
@@ -169,7 +172,8 @@ function FestivalPosterDeck() {
                   src={p.src}
                   alt={p.alt}
                   draggable="false"
-                  loading="eager"
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-full rounded-[20px] object-cover"
                 />
 

@@ -7,13 +7,17 @@ import Eyebrow from '../ui/Eyebrow'
 import Phone, { Tilt } from '../ui/Phone'
 import { EditorScreen, RewardsScreen } from '../screens'
 import { ease, stagger, item } from '../ui/motion'
+import { useLoop, useIsMobile } from '../../mobile/useIsMobile'
 
 export default function Hero() {
   const ref = useRef(null)
   const reduced = useReducedMotion()
+  const mobile = useIsMobile()
+  const loop = useLoop()
+  const still = reduced || mobile // parallax band
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
-  const yDevices = useTransform(scrollYProgress, [0, 1], [0, reduced ? 0 : -50])
-  const yBlob = useTransform(scrollYProgress, [0, 1], [0, reduced ? 0 : 70])
+  const yDevices = useTransform(scrollYProgress, [0, 1], [0, still ? 0 : -50])
+  const yBlob = useTransform(scrollYProgress, [0, 1], [0, still ? 0 : 70])
 
   return (
     <section id="home" ref={ref} className="relative overflow-hidden bg-pale pt-[72px]">
@@ -50,9 +54,9 @@ export default function Hero() {
           <motion.span
             key={i}
             aria-hidden="true"
-            className="pointer-events-none absolute text-lav"
+            className="pointer-events-none absolute text-lav max-md:hidden"
             style={{ left: `${l}%`, top: `${t}%` }}
-            animate={{ opacity: [0.15, 0.8, 0.15], scale: [0.8, 1.2, 0.8], rotate: [0, 45, 0] }}
+            animate={loop({ opacity: [0.15, 0.8, 0.15], scale: [0.8, 1.2, 0.8], rotate: [0, 45, 0] })}
             transition={{ duration: 3 + i * 0.7, repeat: Infinity, ease: 'easeInOut', delay: i * 0.5 }}
           >
             <Sparkles size={s} />
@@ -72,7 +76,7 @@ export default function Hero() {
               transition={{ duration: 1, ease, delay: 0.3 }}
               className="z-10"
             >
-              <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}>
+              <motion.div animate={loop({ y: [0, -10, 0] })} transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}>
                 <Tilt>
                   <Phone label="Festivo festival post editor preview showing a Happy Diwali poster">
                     <EditorScreen />
@@ -86,7 +90,7 @@ export default function Hero() {
               transition={{ duration: 1, ease, delay: 0.5 }}
               className="-ml-6 sm:-ml-10"
             >
-              <motion.div animate={{ y: [0, 12, 0] }} transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}>
+              <motion.div animate={loop({ y: [0, 12, 0] })} transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}>
                 <Tilt>
                   <Phone label="Festivo rewards dashboard preview with sample points and referral progress">
                     <RewardsScreen />
