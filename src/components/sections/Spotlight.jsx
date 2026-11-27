@@ -56,7 +56,7 @@ export default function Spotlight() {
             <motion.div animate={loop({ y: [0, -8, 0] })} transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
               className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-plum via-grape to-brand p-6 text-white shadow-[0_40px_70px_-30px_rgba(10,42,143,0.8)] sm:p-7">
               <div aria-hidden="true" className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-lav/30" />
-              <Crown className="festive-color-cycle max-md:text-amber-300! drop-shadow-[0_0_8px_rgba(251,191,36,0.6)]" size={26} aria-hidden="true" />
+              <Crown className="festive-color-cycle drop-shadow-[0_0_8px_rgba(251,191,36,0.6)]" size={26} aria-hidden="true" />
               <p className="festive-animated-text mt-10 inline-block pb-1 pr-2 font-serif text-2xl font-semibold sm:text-3xl">
                 Business Membership
               </p>

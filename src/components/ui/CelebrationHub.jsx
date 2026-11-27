@@ -105,7 +105,7 @@ function FestivalVisual({ type }) {
         ].map((pt, i) => (
           <motion.div
             key={i}
-            className="pointer-events-none absolute text-amber-300 max-md:hidden"
+            className="pointer-events-none absolute text-amber-300"
             style={{ left: `calc(50% + ${pt.x}px)`, top: `calc(50% + ${pt.y}px)` }}
             animate={loop({
               scale: [0.6, 1.3, 0.6],
@@ -289,7 +289,7 @@ export default function CelebrationHub() {
         <motion.span
           key={i}
           aria-hidden="true"
-          className="pointer-events-none absolute text-amber-300 max-md:hidden"
+          className="pointer-events-none absolute text-amber-300"
           style={{ top: pt.top, left: pt.left, right: pt.right }}
           animate={loop({
             y: [0, -18, 0],

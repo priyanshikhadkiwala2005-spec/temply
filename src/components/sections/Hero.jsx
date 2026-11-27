@@ -54,7 +54,7 @@ export default function Hero() {
           <motion.span
             key={i}
             aria-hidden="true"
-            className="pointer-events-none absolute text-lav max-md:hidden"
+            className="pointer-events-none absolute text-lav"
             style={{ left: `${l}%`, top: `${t}%` }}
             animate={loop({ opacity: [0.15, 0.8, 0.15], scale: [0.8, 1.2, 0.8], rotate: [0, 45, 0] })}
             transition={{ duration: 3 + i * 0.7, repeat: Infinity, ease: 'easeInOut', delay: i * 0.5 }}

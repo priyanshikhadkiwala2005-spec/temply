@@ -150,31 +150,30 @@
     -webkit-backdrop-filter: none !important;
     backdrop-filter: none !important;
   }
-  /* 400px+ ke blur-3xl/2xl glow blobs scroll par bahut atakte hain -> mobile par hide */
+  /* rangeen glow blobs: bhaari blur filter ki jagah soft mask (look wahi, GPU par halka) */
   .blur-3xl,
   .blur-2xl {
-    display: none !important;
+    filter: none !important;
+    -webkit-mask-image: radial-gradient(closest-side, #000 25%, transparent);
+    mask-image: radial-gradient(closest-side, #000 25%, transparent);
   }
-  /* background-position / color wali infinite animations har frame repaint karti hain -> static */
+  /* color-changing animations: paused rehti hain, MobileFestive.jsx inhe halke ticks par
+     aage badhata hai (har frame repaint nahi -> scroll smooth) */
   .festive-animated-text,
   .festive-bright-text,
   .festive-shimmer-text,
   .festive-animated-bg,
-  .festive-progress-flow {
-    animation: none !important;
-    will-change: auto !important;
-  }
-  .festive-color-cycle {
-    animation: none !important;
-    color: #1f5ae6;
-  }
-  .festive-bright-cycle {
-    animation: none !important;
-    color: #fde047;
-  }
+  .festive-progress-flow,
+  .festive-color-cycle,
+  .festive-bright-cycle,
   .festive-stroke-cycle {
-    animation: none !important;
-    stroke: #1f5ae6;
+    animation-play-state: paused;
+    will-change: auto;
+  }
+  /* peeche poori tarah dhake card ke andar sab ruk jaye */
+  .deck-hidden *,
+  .deck-hidden *::after {
+    animation-play-state: paused !important;
   }
   html {
     -webkit-tap-highlight-color: transparent;

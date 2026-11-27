@@ -10,11 +10,13 @@ import { useIsMobile } from './useIsMobile'
 /*   2. Toran ko scroll speed ke saath jhulata hai                    */
 /*   3. Features / Progress ke andar cards ka mini-stack chalata hai  */
 /*   4. Top par phuljhadi (sparkler) progress bar jalata hai          */
+/*   5. Color-changing animations ko halke "ticks" par chalata hai    */
 /*  Desktop par ye component kuch bhi nahi karta.                     */
 /* ------------------------------------------------------------------ */
 
 const STACK_TOP = 18
 const STACK_STEP = 16
+const COLOR_TICK_MS = 100
 
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v))
 
@@ -111,6 +113,7 @@ export default function MobileFestive() {
         if (hide !== lastHidden[i]) {
           lastHidden[i] = hide
           c.style.visibility = hide ? 'hidden' : ''
+          c.classList.toggle('deck-hidden', hide)
         }
         // poori toran par ek hi skew: andar ke phool dobara paint nahi hote
         if (visible && !hide && swChanged && torans[i]) {
@@ -202,6 +205,27 @@ export default function MobileFestive() {
     })
     kick()
 
+    /* ---------- color-changing animations ---------- */
+    // mobile.css me ye paused hain; yahan se aage badhti hain:
+    // second me 10 baar (60 nahi), sirf screen par dikhne wali, aur scroll ke dauran nahi
+    const colorTick = () => {
+      const now = performance.now()
+      if (reduced || document.hidden || now - lastScrollT < 200) return
+      document
+        .getAnimations()
+        .filter((a) => a.animationName?.startsWith('festive'))
+        .filter((a) => {
+          const el = a.effect.target
+          if (el.closest('.deck-hidden')) return false
+          const r = el.getBoundingClientRect()
+          return r.bottom > 0 && r.top < vh
+        })
+        .forEach((a) => {
+          a.currentTime = now
+        })
+    }
+    const colorTimer = setInterval(colorTick, COLOR_TICK_MS)
+
     const ro = new ResizeObserver(onBoxResize)
     cards.forEach((c) => ro.observe(c))
     stacks.flat().forEach((el) => ro.observe(el))
@@ -213,12 +237,13 @@ export default function MobileFestive() {
       cancelAnimationFrame(raf)
       clearTimeout(resizeTimer)
       ro.disconnect()
+      clearInterval(colorTimer)
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onResize)
       document.removeEventListener('click', onClick)
       // desktop par switch ho to sab inline styles saaf
       cards.forEach((c, i) => {
-        c.classList.remove('deck-lit')
+        c.classList.remove('deck-lit', 'deck-hidden')
         for (const p of ['top', 'visibility']) c.style.removeProperty(p)
         shades[i]?.style.removeProperty('opacity')
         torans[i]?.style.removeProperty('transform')
