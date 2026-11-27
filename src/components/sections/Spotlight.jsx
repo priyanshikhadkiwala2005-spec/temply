@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion'
+import { useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
 import { Crown, Coins, Users, ArrowRight } from 'lucide-react'
 import Eyebrow from '../ui/Eyebrow'
 import Blob from '../ui/Blob'
@@ -14,17 +15,21 @@ const FLOW = [
 function Ring({ value = 0.4 }) {
   const r = 42
   const c = 2 * Math.PI * r
+  // iOS Safari SVG ke andar ke <circle> ko "in view" detect nahi karta,
+  // isliye bahar wale div ko observe karte hain
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true })
   return (
-    <div className="relative inline-flex items-center justify-center">
+    <div ref={ref} className="relative inline-flex items-center justify-center">
       <svg width="110" height="110" viewBox="0 0 110 110" role="img" aria-label="Sample referral progress, 2 of 5">
         <circle cx="55" cy="55" r={r} fill="none" stroke="#dbe9ff" strokeWidth="10" />
         <motion.circle
           cx="55" cy="55" r={r} fill="none" strokeWidth="10" strokeLinecap="round"
+          stroke="#1f5ae6" /* fallback rang; animation ise badalti rehti hai */
           className="festive-stroke-cycle"
           strokeDasharray={c}
           initial={{ strokeDashoffset: c }}
-          whileInView={{ strokeDashoffset: c * (1 - value) }}
-          viewport={{ once: true }}
+          animate={{ strokeDashoffset: inView ? c * (1 - value) : c }}
           transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
           transform="rotate(-90 55 55)"
         />
