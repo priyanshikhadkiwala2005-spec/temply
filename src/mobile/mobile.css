@@ -183,7 +183,8 @@
   .sparkler {
     display: block;
     position: fixed;
-    inset: 0 0 auto;
+    /* header (72px) ke neeche wale kinare par: screen ke gol kone / notch ke peeche nahi chhupti */
+    inset: 69px 0 auto;
     height: 3px;
     z-index: 70;
     pointer-events: none;
