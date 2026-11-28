@@ -35,9 +35,11 @@ const SLOT = [
   { x: 14, y: 32, scale: 0.82, rotate: 9, opacity: 0.9 },
 ]
 
-function Poster({ item, slot, dir, dragX, onTap }) {
+function Poster({ item, slot, dir, dragX, onTap, near }) {
   const top = slot === 0
   const gone = slot === N - 1 // abhi-abhi hata hua poster: side me ud kar gayab
+  // sirf dikhne wale (aur agla / pichhla) poster pehle se load karo
+  const preload = near && (slot < 4 || gone)
   const pose = gone
     ? { x: dir * 340, y: -10, scale: 0.96, rotate: dir * 16, opacity: 0 }
     : (SLOT[slot] ?? { ...SLOT[3], scale: 0.76, opacity: 0 })
@@ -67,7 +69,7 @@ function Poster({ item, slot, dir, dragX, onTap }) {
           alt={item.name}
           width={760}
           height={1075}
-          loading="lazy"
+          loading={preload ? 'eager' : 'lazy'}
           decoding="async"
           draggable={false}
           className="pointer-events-none h-full w-full select-none rounded-[1.2rem] object-cover sm:rounded-[1.6rem]"
@@ -104,6 +106,7 @@ export default function FestivalStage() {
   const wheelLock = useRef(0)
   const dragX = useMotionValue(0)
   const inView = useInView(rootRef, { amount: 0.35 })
+  const near = useInView(rootRef, { once: true, margin: '900px 0px' })
   const current = FESTIVALS[active]
 
   const step = useCallback((d) => {
@@ -223,6 +226,7 @@ export default function FestivalStage() {
                 dir={dir}
                 dragX={dragX}
                 onTap={() => select(i)}
+                near={near}
               />
             ))}
           </div>

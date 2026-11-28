@@ -63,6 +63,8 @@ function FestivalPosterDeck() {
   const ref = useRef(null)
   const mobile = useIsMobile()
   const inView = useInView(ref)
+  // posters screen par aane se thoda pehle load ho jayein (page open par nahi)
+  const near = useInView(ref, { once: true, margin: '900px 0px' })
   const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
   const n = POSTERS.length
@@ -172,7 +174,7 @@ function FestivalPosterDeck() {
                   src={p.src}
                   alt={p.alt}
                   draggable="false"
-                  loading="lazy"
+                  loading={near ? 'eager' : 'lazy'}
                   decoding="async"
                   className="h-full w-full rounded-[20px] object-cover"
                 />

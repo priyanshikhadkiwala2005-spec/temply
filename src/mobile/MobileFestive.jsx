@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useReducedMotion } from 'framer-motion'
 import { useIsMobile } from './useIsMobile'
+import { createCelebration } from './celebrate'
 
 /* ------------------------------------------------------------------ */
 /*  MOBILE FESTIVE SCROLL ENGINE                                      */
@@ -11,6 +12,7 @@ import { useIsMobile } from './useIsMobile'
 /*   3. Features / Progress ke andar cards ka mini-stack chalata hai  */
 /*   4. Top par phuljhadi (sparkler) progress bar jalata hai          */
 /*   5. Color-changing animations ko halke "ticks" par chalata hai    */
+/*   6. Naye card par "anar" sparks aur page ke end par fireworks     */
 /*  Desktop par ye component kuch bhi nahi karta.                     */
 /* ------------------------------------------------------------------ */
 
@@ -51,6 +53,7 @@ export default function MobileFestive() {
     let lastSw = 999
     let finale = false
     let resizeTimer = 0
+    const party = createCelebration()
 
     const measure = () => {
       vh = window.innerHeight
@@ -120,10 +123,11 @@ export default function MobileFestive() {
           torans[i].style.transform = `skewX(${(-sw * 0.45).toFixed(2)}deg)`
         }
 
-        // card arrival: toran opens (sirf ek baar)
+        // card arrival: toran opens + anar sparks (sirf ek baar)
         if (i > 0 && !lit.has(i) && top < vh * 0.55) {
           lit.add(i)
           c.classList.add('deck-lit')
+          if (!reduced && top > -40) party.anar(clamp((top + 26) / vh, 0.05, 0.95))
         }
       })
 
@@ -150,6 +154,7 @@ export default function MobileFestive() {
 
       if (!finale && progress > 0.985) {
         finale = true
+        if (!reduced) party.finale()
       }
 
       const settling = Math.abs(swVel) > 0.02 || Math.abs(sw - target) > 0.05
@@ -236,6 +241,7 @@ export default function MobileFestive() {
     return () => {
       cancelAnimationFrame(raf)
       clearTimeout(resizeTimer)
+      party.stop()
       ro.disconnect()
       clearInterval(colorTimer)
       window.removeEventListener('scroll', onScroll)

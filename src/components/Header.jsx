@@ -35,6 +35,13 @@ export default function Header() {
       <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-5 md:px-8">
         {/* LOGO */}
         <a href="#home" className="flex items-center gap-2 transition-transform hover:scale-[1.02]">
+          <img
+            src="/ai-badge.gif"
+            alt="AI Generate"
+            width="26"
+            height="26"
+            className="-mr-2 h-[26px] w-[26px] shrink-0 -translate-y-3"
+          />
           <Brand />
         </a>
 
